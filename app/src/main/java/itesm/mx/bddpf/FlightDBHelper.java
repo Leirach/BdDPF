@@ -34,7 +34,7 @@ public class FlightDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.FlightTable.COLUMN_NAME_GATE_DESTINATION + " TEXT," +
                 DataBaseSchema.FlightTable.COLUMN_NAME_AIRPLANE + " TEXT" +
                 ")";
-        Log.i("Eventhelper onCreate", CREATE_FLIGHTS_TABLE);
+        Log.i("FlightDBHelper onCreate", CREATE_FLIGHTS_TABLE);
         db.execSQL(CREATE_FLIGHTS_TABLE);
 
         String CREATE_AIRPORT_TABLE = "CREATE TABLE " +
@@ -77,6 +77,36 @@ public class FlightDBHelper extends SQLiteOpenHelper {
                 ")";
         Log.i("Eventhelper onCreate", CREATE_TICKET_TABLE);
         db.execSQL(CREATE_TICKET_TABLE);
+
+        String CREATE_PASSENGERS_TABLE = "CREATE TABLE " +
+                DataBaseSchema.Passenger.TABLE_NAME +
+                "(" +
+                DataBaseSchema.Passenger._ID + " INTEGER PRIMARY KEY," +
+                DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_ID + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_TYPE + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_NUMBER_CELL + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_NUMBER_FIXED + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_LAST_NAME + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_EMAIL + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_STREET_ADDRESS + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_POSTAL_CODE + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_CITY + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_STATE + " TEXT," +
+                DataBaseSchema.Passenger.COLUMN_NAME_COUNTRY + " TEXT" +
+                ")";
+        Log.i("FlightDBHelper onCreate", CREATE_PASSENGERS_TABLE);
+        db.execSQL(CREATE_PASSENGERS_TABLE);
+
+        String CREATE_RESERVATIONS_TABLE = "CREATE TABLE " +
+                DataBaseSchema.Reservation.TABLE_NAME +
+                "(" +
+                DataBaseSchema.Reservation.COLUMN_NAME_RESERVATION_CODE + " TEXT," +
+                DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " TEXT," +
+                DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " TEXT" +
+                ")";
+        Log.i("FlightDBHelper onCreate", CREATE_RESERVATIONS_TABLE);
+        db.execSQL(CREATE_RESERVATIONS_TABLE);
     }
 
     @Override
