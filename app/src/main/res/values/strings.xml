@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BdD PF</string>
+    <string name="flights">Vuelos</string>
+    <string name="passengers">Pasajeros</string>
+    <string name="reservations">Reservaciones</string>
+    <string name="tickets">Boletos</string>
 </resources>
