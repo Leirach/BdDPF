@@ -58,6 +58,13 @@ public class FlightsActivity extends AppCompatActivity {
 
             }
         });
+
+        actv_Origins.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Origins.showDropDown();
+            }
+        });
     }
 
     public void setFlightList() {
