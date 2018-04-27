@@ -11,17 +11,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FlightIDAdapter extends ArrayAdapter<String> {
-    public FlightIDAdapter(Context context, ArrayList<String> flightIDs) {
-        super(context, 0, flightIDs);
+public class FlightAdapter extends ArrayAdapter<Flight> {
+    public FlightAdapter(Context context, ArrayList<Flight> flights) {
+        super(context, 0, flights);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
+        Flight flight = getItem(position);
+        convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_flight, parent, false);
         TextView tvFlightID = (TextView) convertView.findViewById(R.id.text_flightID);
-        tvFlightID.setText(getItem(position));
+        TextView tvFlightOrigin = (TextView) convertView.findViewById(R.id.text_from);
+        tvFlightID.setText(flight.getFlightID());
+        tvFlightOrigin.setText(flight.getAirportOrigin());
         return convertView;
     }
 }
