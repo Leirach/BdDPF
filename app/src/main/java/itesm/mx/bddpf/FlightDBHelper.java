@@ -44,9 +44,9 @@ public class FlightDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.AirportTable.COLUMN_NAME_AIRPORT_CODE + " TEXT," +
                 DataBaseSchema.AirportTable.COLUMN_NAME_CITY + " TEXT," +
                 DataBaseSchema.AirportTable.COLUMN_NAME_COUNTRY + " TEXT," +
-                DataBaseSchema.AirportTable.COLUMN_NAME_NAME + " TEXT," +
+                DataBaseSchema.AirportTable.COLUMN_NAME_NAME + " TEXT" +
                 ")";
-        Log.i("Eventhelper onCreate", CREATE_AIRPORT_TABLE);
+        Log.i("FlightDBHelper onCreate", CREATE_AIRPORT_TABLE);
         db.execSQL(CREATE_AIRPORT_TABLE);
 
         String CREATE_AIRPLANE_TABLE = "CREATE TABLE " +
@@ -57,9 +57,9 @@ public class FlightDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.Airplane.COLUMN_NAME_MODEL + " TEXT," +
                 DataBaseSchema.Airplane.COLUMN_NAME_SEATS_ECONOMY + " INTEGER," +
                 DataBaseSchema.Airplane.COLUMN_NAME_SEATS_BUSINESS + " INTEGER," +
-                DataBaseSchema.Airplane.COLUMN_NAME_SEATS_FIRST_CLASS + " INTEGER," +
+                DataBaseSchema.Airplane.COLUMN_NAME_SEATS_FIRST_CLASS + " INTEGER" +
                 ")";
-        Log.i("Eventhelper onCreate", CREATE_AIRPLANE_TABLE);
+        Log.i("FlightDBHelper onCreate", CREATE_AIRPLANE_TABLE);
         db.execSQL(CREATE_AIRPLANE_TABLE);
 
         String CREATE_TICKET_TABLE = "CREATE TABLE " +
@@ -67,15 +67,15 @@ public class FlightDBHelper extends SQLiteOpenHelper {
                 "(" +
                 DataBaseSchema.Ticket._ID + " INTEGER PRIMARY KEY," +
                 DataBaseSchema.Ticket.COLUMN_NAME_TICKET_NUMBER + " TEXT," +
-                DataBaseSchema.Ticket.COLUMN_NAME_PRICE + " DOUBLE," +
+                DataBaseSchema.Ticket.COLUMN_NAME_PRICE + " REAL," +
                 DataBaseSchema.Ticket.COLUMN_NAME_SEAT + " TEXT," +
                 DataBaseSchema.Ticket.COLUMN_NAME_CLASS + " TEXT," +
                 DataBaseSchema.Ticket.COLUMN_NAME_FLIGHT + " TEXT," +
                 DataBaseSchema.Ticket.COLUMN_NAME_RESERVATION + " TEXT," +
                 DataBaseSchema.Ticket.COLUMN_NAME_EXTRA_SERVICES + " TEXT," +
-                DataBaseSchema.Ticket.COLUMN_NAME_PASSENGER + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_PASSENGER + " TEXT" +
                 ")";
-        Log.i("Eventhelper onCreate", CREATE_TICKET_TABLE);
+        Log.i("FlightDBHelper onCreate", CREATE_TICKET_TABLE);
         db.execSQL(CREATE_TICKET_TABLE);
 
         String CREATE_PASSENGERS_TABLE = "CREATE TABLE " +
@@ -114,6 +114,21 @@ public class FlightDBHelper extends SQLiteOpenHelper {
         String DELETE_FLIGHTS_TABLE = "DROP TABLE IF EXISTS  " +
                 DataBaseSchema.FlightTable.TABLE_NAME;
         db.execSQL(DELETE_FLIGHTS_TABLE);
+        String DELETE_RESERVATIONS_TABLE = "DROP TABLE IF EXISTS  " +
+                DataBaseSchema.Reservation.TABLE_NAME;
+        db.execSQL(DELETE_RESERVATIONS_TABLE);
+        String DELETE_PASSENGERS_TABLE = "DROP TABLE IF EXISTS  " +
+                DataBaseSchema.Passenger.TABLE_NAME;
+        db.execSQL(DELETE_PASSENGERS_TABLE);
+        String DELETE_AIRPLANES_TABLE = "DROP TABLE IF EXISTS  " +
+                DataBaseSchema.Airplane.TABLE_NAME;
+        db.execSQL(DELETE_AIRPLANES_TABLE);
+        String DELETE_AIRPORTS_TABLE = "DROP TABLE IF EXISTS  " +
+                DataBaseSchema.AirportTable.TABLE_NAME;
+        db.execSQL(DELETE_AIRPORTS_TABLE);
+        String DELETE_TICKETS_TABLE = "DROP TABLE IF EXISTS  " +
+                DataBaseSchema.Ticket.TABLE_NAME;
+        db.execSQL(DELETE_TICKETS_TABLE);
         onCreate(db);
     }
 
