@@ -4,4 +4,7 @@
     <string name="passengers">Pasajeros</string>
     <string name="reservations">Reservaciones</string>
     <string name="tickets">Boletos</string>
+    <string name="from">Salida:</string>
+    <string name="flightID">FlightID:</string>
+    <string name="origin">origin:</string>
 </resources>

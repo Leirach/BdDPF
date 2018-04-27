@@ -73,20 +73,81 @@ public class FlightOperations {
     }
 
     public ArrayList<String> getAllFlightIDs() {
-        ArrayList<String> listEvents = new ArrayList<String>();
+        ArrayList<String> listFlightIDs = new ArrayList<String>();
         String selectQuery = "SELECT " + DataBaseSchema.FlightTable.COLUMN_NAME_FLIGHT_ID + " FROM " + DataBaseSchema.FlightTable.TABLE_NAME;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);
             if (cursor.moveToFirst()) {
                 do {
-                    listEvents.add(cursor.getString(0));
+                    listFlightIDs.add(cursor.getString(0));
                 } while (cursor.moveToNext());
             }
             cursor.close();
         } catch (SQLException e) {
             Log.e("SQLLIST", e.toString());
         }
-        return listEvents;
+        return listFlightIDs;
+    }
+
+    public ArrayList<String> getUniqueOrigins() {
+        ArrayList<String> listOrigins = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + " FROM " + DataBaseSchema.FlightTable.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listOrigins.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listOrigins;
+    }
+    
+    public ArrayList<Flight> getAllFlights() {
+        ArrayList<Flight> listFlights = new ArrayList<Flight>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME;
+        Flight flight;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
+                                        cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                                        cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                                        cursor.getString(9));
+                    listFlights.add(flight);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listFlights;
+    }
+
+    public ArrayList<Flight> getAllFlightsFrom(String airportOrigin) {
+        ArrayList<Flight> listFlights = new ArrayList<Flight>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + "=\"" + airportOrigin + "\"";
+        Flight flight;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                            cursor.getString(9));
+                    listFlights.add(flight);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listFlights;
     }
 }
 
