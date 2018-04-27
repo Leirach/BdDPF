@@ -37,6 +37,47 @@ public class FlightDBHelper extends SQLiteOpenHelper {
         Log.i("FlightDBHelper onCreate", CREATE_FLIGHTS_TABLE);
         db.execSQL(CREATE_FLIGHTS_TABLE);
 
+        String CREATE_AIRPORT_TABLE = "CREATE TABLE " +
+                DataBaseSchema.AirportTable.TABLE_NAME +
+                "(" +
+                DataBaseSchema.AirportTable._ID + " INTEGER PRIMARY KEY," +
+                DataBaseSchema.AirportTable.COLUMN_NAME_AIRPORT_CODE + " TEXT," +
+                DataBaseSchema.AirportTable.COLUMN_NAME_CITY + " TEXT," +
+                DataBaseSchema.AirportTable.COLUMN_NAME_COUNTRY + " TEXT," +
+                DataBaseSchema.AirportTable.COLUMN_NAME_NAME + " TEXT," +
+                ")";
+        Log.i("Eventhelper onCreate", CREATE_AIRPORT_TABLE);
+        db.execSQL(CREATE_AIRPORT_TABLE);
+
+        String CREATE_AIRPLANE_TABLE = "CREATE TABLE " +
+                DataBaseSchema.Airplane.TABLE_NAME +
+                "(" +
+                DataBaseSchema.Airplane._ID + " INTEGER PRIMARY KEY," +
+                DataBaseSchema.Airplane.COLUMN_NAME_AIRPLANE_ID + " TEXT," +
+                DataBaseSchema.Airplane.COLUMN_NAME_MODEL + " TEXT," +
+                DataBaseSchema.Airplane.COLUMN_NAME_SEATS_ECONOMY + " INTEGER," +
+                DataBaseSchema.Airplane.COLUMN_NAME_SEATS_BUSINESS + " INTEGER," +
+                DataBaseSchema.Airplane.COLUMN_NAME_SEATS_FIRST_CLASS + " INTEGER," +
+                ")";
+        Log.i("Eventhelper onCreate", CREATE_AIRPLANE_TABLE);
+        db.execSQL(CREATE_AIRPLANE_TABLE);
+
+        String CREATE_TICKET_TABLE = "CREATE TABLE " +
+                DataBaseSchema.Ticket.TABLE_NAME +
+                "(" +
+                DataBaseSchema.Ticket._ID + " INTEGER PRIMARY KEY," +
+                DataBaseSchema.Ticket.COLUMN_NAME_TICKET_NUMBER + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_PRICE + " DOUBLE," +
+                DataBaseSchema.Ticket.COLUMN_NAME_SEAT + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_CLASS + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_FLIGHT + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_RESERVATION + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_EXTRA_SERVICES + " TEXT," +
+                DataBaseSchema.Ticket.COLUMN_NAME_PASSENGER + " TEXT," +
+                ")";
+        Log.i("Eventhelper onCreate", CREATE_TICKET_TABLE);
+        db.execSQL(CREATE_TICKET_TABLE);
+
         String CREATE_PASSENGERS_TABLE = "CREATE TABLE " +
                 DataBaseSchema.Passenger.TABLE_NAME +
                 "(" +
