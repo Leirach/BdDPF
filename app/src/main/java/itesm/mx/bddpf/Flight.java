@@ -1,8 +1,11 @@
 package itesm.mx.bddpf;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Flight {
+public class Flight implements Parcelable{
     private String flightID;
     private Date flightTime;
     private String airportOrigin;
@@ -12,6 +15,15 @@ public class Flight {
     private String terminalDestination;
     private String gateDestination;
     private String airplane;
+
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Flight createFromParcel(Parcel in) {
+            return new Flight(in);
+        }
+
+        public Flight[] newArray(int size) { return new Flight[size]; }
+    };
 
     public Flight(String flightID, Date flightTime, String airportOrigin, String terminalOrigin, String gateOrigin, String airportDestination, String terminalDestination, String gateDestination, String airplane) {
         this.flightID = flightID;
@@ -23,6 +35,36 @@ public class Flight {
         this.terminalDestination = terminalDestination;
         this.gateDestination = gateDestination;
         this.airplane = airplane;
+    }
+
+    public Flight (Parcel in) {
+        this.flightID = in.readString();
+        this.flightTime = new Date(in.readLong());
+        this.airportOrigin = in.readString();
+        this.terminalOrigin = in.readString();
+        this.gateOrigin = in.readString();
+        this.airportDestination = in.readString();
+        this.terminalDestination = in.readString();
+        this.gateDestination = in.readString();
+        this.airplane = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(flightID);
+        dest.writeLong(flightTime.getTime());
+        dest.writeString(airportOrigin);
+        dest.writeString(terminalOrigin);
+        dest.writeString(gateOrigin);
+        dest.writeString(airportDestination);
+        dest.writeString(terminalDestination);
+        dest.writeString(gateDestination);
+        dest.writeString(airplane);
     }
 
     public String getFlightID() {

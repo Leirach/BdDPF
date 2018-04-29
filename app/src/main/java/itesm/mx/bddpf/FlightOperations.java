@@ -105,6 +105,23 @@ public class FlightOperations {
         }
         return listOrigins;
     }
+
+    public ArrayList<String> getUniqueDestinations() {
+        ArrayList<String> listDestinations = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_DESTINATION + " FROM " + DataBaseSchema.FlightTable.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listDestinations.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listDestinations;
+    }
     
     public ArrayList<Flight> getAllFlights() {
         ArrayList<Flight> listFlights = new ArrayList<Flight>();
@@ -131,6 +148,28 @@ public class FlightOperations {
     public ArrayList<Flight> getAllFlightsFrom(String airportOrigin) {
         ArrayList<Flight> listFlights = new ArrayList<Flight>();
         String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + "=\"" + airportOrigin + "\"";
+        Flight flight;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                            cursor.getString(9));
+                    listFlights.add(flight);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listFlights;
+    }
+
+    public ArrayList<Flight> getAllFlightsTo(String airportDestination) {
+        ArrayList<Flight> listFlights = new ArrayList<Flight>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_DESTINATION + "=\"" + airportDestination + "\"";
         Flight flight;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);
