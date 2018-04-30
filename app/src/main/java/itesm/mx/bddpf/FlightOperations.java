@@ -188,5 +188,46 @@ public class FlightOperations {
         }
         return listFlights;
     }
+
+    public ArrayList<Flight> getAllFlightsFromTo(String airportOrigin, String airportDestination) {
+        ArrayList<Flight> listFlights = new ArrayList<Flight>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + "=\"" + airportOrigin + "\" AND " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_DESTINATION + "=\"" + airportDestination + "\"";
+        Flight flight;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                            cursor.getString(9));
+                    listFlights.add(flight);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listFlights;
+    }
+
+    public Flight getFlight(String flightID) {
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_FLIGHT_ID + "=\"" + flightID + "\"";
+        Flight flight;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                            cursor.getString(9));
+                return flight;
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return null;
+    }
 }
 

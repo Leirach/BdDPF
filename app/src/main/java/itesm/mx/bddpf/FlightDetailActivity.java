@@ -9,13 +9,19 @@ import java.text.SimpleDateFormat;
 public class FlightDetailActivity extends AppCompatActivity {
     private Flight flight;
     public static final String FLIGHT_KEY = "flight";
+    private FlightOperations dao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_detail);
+        dao = new FlightOperations(this);
+        dao.open();
+
         Bundle bundle = getIntent().getExtras();
-        flight = bundle.getParcelable(FLIGHT_KEY);
+        String flightID = bundle.getString(FLIGHT_KEY);
+        flight = dao.getFlight(flightID);
         TextView tvFlightID = (TextView) findViewById(R.id.text_flightID);
         TextView tvFlightOrigin = (TextView) findViewById(R.id.text_from);
         TextView tvFlightOriginTerminal = (TextView) findViewById(R.id.text_from_terminal);
@@ -37,5 +43,17 @@ public class FlightDetailActivity extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE dd/MM-yyyy HH:mm");
         tvDate.setText(simpleDateFormat.format(flight.getFlightTime()));
+    }
+
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
     }
 }

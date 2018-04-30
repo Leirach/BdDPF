@@ -19,6 +19,8 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
     private ArrayList<Flight> flights;
     private FlightAdapter flightAdapter;
     private ListView listView;
+    AutoCompleteTextView actv_Origins;
+    AutoCompleteTextView actv_Destinations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
         setFlightList();
 
         ArrayAdapter<String> adapterOrigin = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueOrigins());
-        final AutoCompleteTextView actv_Origins = (AutoCompleteTextView) findViewById(R.id.edit_from);
+        actv_Origins = (AutoCompleteTextView) findViewById(R.id.edit_from);
         actv_Origins.setThreshold(0);
         actv_Origins.setAdapter(adapterOrigin);
         actv_Origins.addTextChangedListener(new TextWatcher() {
@@ -49,10 +51,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String airportOriginSelected = actv_Origins.getText().toString().toUpperCase();
-                flights = dao.getAllFlightsFrom(airportOriginSelected);
-                flightAdapter = new FlightAdapter(getApplicationContext(), flights);
-                setFlightList();
+                searchFlights();
             }
 
             @Override
@@ -69,7 +68,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
         });
 
         ArrayAdapter<String> adapterDestination = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueDestinations());
-        final AutoCompleteTextView actv_Destinations = (AutoCompleteTextView) findViewById(R.id.edit_to);
+        actv_Destinations = (AutoCompleteTextView) findViewById(R.id.edit_to);
         actv_Destinations.setThreshold(0);
         actv_Destinations.setAdapter(adapterDestination);
         actv_Destinations.addTextChangedListener(new TextWatcher() {
@@ -80,10 +79,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String airportDestinationSelected = actv_Destinations.getText().toString().toUpperCase();
-                flights = dao.getAllFlightsTo(airportDestinationSelected);
-                flightAdapter = new FlightAdapter(getApplicationContext(), flights);
-                setFlightList();
+                searchFlights();
             }
 
             @Override
@@ -92,12 +88,45 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
             }
         });
 
-        actv_Origins.setOnClickListener(new View.OnClickListener() {
+        actv_Destinations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 actv_Destinations.showDropDown();
             }
         });
+    }
+
+    public void searchFlights(){
+        String airportOriginSelected = actv_Origins.getText().toString().toUpperCase();
+        String airportDestinationSelected = actv_Destinations.getText().toString().toUpperCase();
+        if (airportOriginSelected.length() != 0 && airportDestinationSelected.length() != 0) {
+            airportsToFrom(airportOriginSelected, airportDestinationSelected);
+        } else if (airportOriginSelected.length() == 0 && airportDestinationSelected.length() != 0) {
+            airportsTo(airportDestinationSelected);
+        } else if (airportOriginSelected.length() != 0 && airportDestinationSelected.length() == 0) {
+            airportsFrom(airportOriginSelected);
+        } else {
+            flights = dao.getAllFlights();
+            setFlightList();
+        }
+    }
+
+    public void airportsFrom(String airportOriginSelected) {
+        flights = dao.getAllFlightsFrom(airportOriginSelected);
+        flightAdapter = new FlightAdapter(getApplicationContext(), flights);
+        setFlightList();
+    }
+
+    public void airportsTo(String airportDestinationSelected) {
+        flights = dao.getAllFlightsTo(airportDestinationSelected);
+        flightAdapter = new FlightAdapter(getApplicationContext(), flights);
+        setFlightList();
+    }
+
+    public void airportsToFrom(String airportOriginSelected, String airportDestinationSelected) {
+        flights = dao.getAllFlightsFromTo(airportOriginSelected, airportDestinationSelected);
+        flightAdapter = new FlightAdapter(getApplicationContext(), flights);
+        setFlightList();
     }
 
     public void setFlightList() {
@@ -124,7 +153,20 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent flightDetail = new Intent(this, FlightDetailActivity.class);
-        flightDetail.putExtra(FlightDetailActivity.FLIGHT_KEY, (Flight) parent.getItemAtPosition(position));
+        Flight flight = (Flight) parent.getItemAtPosition(position);
+        flightDetail.putExtra(FlightDetailActivity.FLIGHT_KEY, flight.getFlightID());
         startActivity(flightDetail);
+    }
+
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
     }
 }
