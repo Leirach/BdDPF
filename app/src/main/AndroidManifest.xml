@@ -19,7 +19,8 @@
         <activity android:name=".PassengerActivity" />
         <activity android:name=".ReservationsActivity" />
         <activity android:name=".TicketsActivity" />
-        <activity android:name=".FlightsActivity"></activity>
+        <activity android:name=".FlightsActivity" />
+        <activity android:name=".FlightDetailActivity"></activity>
     </application>
 
 </manifest>
