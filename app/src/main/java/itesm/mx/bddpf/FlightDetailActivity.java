@@ -31,6 +31,7 @@ public class FlightDetailActivity extends AppCompatActivity {
         TextView tvFlightDestinationGate = (TextView) findViewById(R.id.text_to_gate);
         TextView tvAirplane = (TextView) findViewById(R.id.text_airplane);
         TextView tvDate = (TextView) findViewById(R.id.text_date);
+        TextView tvDuration = (TextView) findViewById(R.id.text_duration);
 
         tvFlightID.setText(flight.getFlightID());
         tvFlightOrigin.setText(flight.getAirportOrigin());
@@ -40,6 +41,7 @@ public class FlightDetailActivity extends AppCompatActivity {
         tvFlightDestinationTerminal.setText(flight.getTerminalDestination());
         tvFlightOriginGate.setText(flight.getGateOrigin());
         tvAirplane.setText(flight.getAirplane());
+        tvDuration.setText(Integer.toString(flight.getFlightDuration()));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE dd/MM-yyyy HH:mm");
         tvDate.setText(simpleDateFormat.format(flight.getFlightTime()));

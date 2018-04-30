@@ -8,6 +8,7 @@ import java.util.Date;
 public class Flight implements Parcelable{
     private String flightID;
     private Date flightTime;
+    private int flightDuration; //In minutes
     private String airportOrigin;
     private String terminalOrigin;
     private String gateOrigin;
@@ -25,9 +26,10 @@ public class Flight implements Parcelable{
         public Flight[] newArray(int size) { return new Flight[size]; }
     };
 
-    public Flight(String flightID, Date flightTime, String airportOrigin, String terminalOrigin, String gateOrigin, String airportDestination, String terminalDestination, String gateDestination, String airplane) {
+    public Flight(String flightID, Date flightTime, int flightDuration, String airportOrigin, String terminalOrigin, String gateOrigin, String airportDestination, String terminalDestination, String gateDestination, String airplane) {
         this.flightID = flightID;
         this.flightTime = flightTime;
+        this.flightDuration = flightDuration;
         this.airportOrigin = airportOrigin;
         this.terminalOrigin = terminalOrigin;
         this.gateOrigin = gateOrigin;
@@ -40,6 +42,7 @@ public class Flight implements Parcelable{
     public Flight (Parcel in) {
         this.flightID = in.readString();
         this.flightTime = new Date(in.readLong());
+        this.flightDuration = in.readInt();
         this.airportOrigin = in.readString();
         this.terminalOrigin = in.readString();
         this.gateOrigin = in.readString();
@@ -58,6 +61,7 @@ public class Flight implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(flightID);
         dest.writeLong(flightTime.getTime());
+        dest.writeInt(flightDuration);
         dest.writeString(airportOrigin);
         dest.writeString(terminalOrigin);
         dest.writeString(gateOrigin);
@@ -81,6 +85,14 @@ public class Flight implements Parcelable{
 
     public void setFlightTime(Date flightTime) {
         this.flightTime = flightTime;
+    }
+
+    public int getFlightDuration() {
+        return flightDuration;
+    }
+
+    public void setFlightDuration(int flightDuration) {
+        this.flightDuration = flightDuration;
     }
 
     public String getAirportOrigin() {

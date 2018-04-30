@@ -26,6 +26,7 @@ public class FlightDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.FlightTable._ID + " INTEGER PRIMARY KEY," +
                 DataBaseSchema.FlightTable.COLUMN_NAME_FLIGHT_ID + " TEXT," +
                 DataBaseSchema.FlightTable.COLUMN_NAME_FLIGHT_TIME + " INTEGER," +
+                DataBaseSchema.FlightTable.COLUMN_NAME_FLIGHT_DURATION + " INTEGER," +
                 DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + " TEXT," +
                 DataBaseSchema.FlightTable.COLUMN_NAME_TERMINAL_ORIGIN + " TEXT," +
                 DataBaseSchema.FlightTable.COLUMN_NAME_GATE_ORIGIN + " TEXT," +
