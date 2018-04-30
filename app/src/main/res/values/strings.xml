@@ -11,4 +11,6 @@
     <string name="gate">Puerta:</string>
     <string name="destination">Destination:</string>
     <string name="filldatabase">Llenar base de datos</string>
+    <string name="passenger">Passenger:</string>
+    <string name="payment">Payment:</string>
 </resources>

@@ -325,5 +325,116 @@ public class FlightOperations {
         }
         return null;
     }
+
+    public ArrayList<Reservation> getAllReservations() {
+        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME;
+        Reservation reservation;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                    listReservations.add(reservation);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listReservations;
+    }
+
+    public ArrayList<String> getUniquePassengers() {
+        ArrayList<String> listPassengers = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " FROM " + DataBaseSchema.Reservation.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listPassengers.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listPassengers;
+    }
+
+    public ArrayList<String> getUniquePayments() {
+        ArrayList<String> listPayments = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " FROM " + DataBaseSchema.Reservation.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listPayments.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listPayments;
+    }
+
+
+    public ArrayList<Reservation> getAllReservationsWithPayment(String payment) {
+        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + "=\"" + payment + "\"";
+        Reservation reservation;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                    listReservations.add(reservation);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listReservations;
+    }
+
+    public ArrayList<Reservation> getAllReservationsWithPassenger(String passenger) {
+        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + "=\"" + passenger + "\"";
+        Reservation reservation;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                    listReservations.add(reservation);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listReservations;
+    }
+
+    public ArrayList<Reservation> getAllReservationsWithPassAndPay(String passenger, String payment) {
+        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + "=\"" + passenger + "\" AND " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + "=\"" + payment + "\"";
+        Reservation reservation;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                    listReservations.add(reservation);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listReservations;
+    }
 }
 
