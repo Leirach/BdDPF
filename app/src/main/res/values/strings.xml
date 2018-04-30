@@ -10,4 +10,5 @@
     <string name="terminal">Terminal:</string>
     <string name="gate">Puerta:</string>
     <string name="destination">Destination:</string>
+    <string name="filldatabase">Llenar base de datos</string>
 </resources>

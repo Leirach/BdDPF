@@ -31,8 +31,6 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
         dao = new FlightOperations(this);
         dao.open();
 
-        //comment this after running first time since it will keep on adding new flights to the database every time
-        //addFlightsToDatabase();
 
         listView = (ListView) findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
@@ -132,22 +130,6 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
     public void setFlightList() {
         flightAdapter = new FlightAdapter(this, flights);
         listView.setAdapter(flightAdapter);
-    }
-
-    private void addFlightsToDatabase() {
-        dao.addFlight("KSDJ", new Date(), "LAX", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("ASDL", new Date(), "LAX", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("FDAA", new Date(), "MEX", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("HGSD", new Date(), "GOT", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("JFGF", new Date(), "LAX", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("TYRB", new Date(), "GOT", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("FDSFF", new Date(), "LAX", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("FDSF", new Date(), "MTY", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("LHGG", new Date(), "MEX", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("KJHG", new Date(), "GOT", "2", "1", "MEX", "4", "12", "ASKDJJ");
-        dao.addFlight("IUTR", new Date(), "MTY", "2", "1", "MEX", "4", "12", "ASKDJJ");
-
-
     }
 
     @Override
