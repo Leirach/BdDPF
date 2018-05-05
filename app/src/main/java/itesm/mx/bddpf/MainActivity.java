@@ -93,17 +93,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //Add reservations
-        dao.addReservation("KPM123", "MARC650607HNLRIR07", "Cash".toUpperCase());
-        dao.addReservation("AVD691", "ASDJ638741HNLRIR12", "CreditCard".toUpperCase());
-        dao.addReservation("LKD231", "LOKD250607HNLKJR04", "DebitCard".toUpperCase());
-        dao.addReservation("GJK986", "MARC650607HNLRIR07", "Invoice".toUpperCase());
-        dao.addReservation("KJD763", "ASDJ638741HNLRIR12", "CreditCard".toUpperCase());
-        dao.addReservation("SJF235", "LOKD250607HNLKJR04", "DebitCard".toUpperCase());
-        dao.addReservation("OIF236", "MARC650607HNLRIR07", "Cash".toUpperCase());
-        dao.addReservation("SKJ234", "LOKD250607HNLKJR04", "CreditCard".toUpperCase());
-        dao.addReservation("AQW862", "LOKD250607HNLKJR04", "Invoice".toUpperCase());
-        dao.addReservation("KFJ823", "ASDJ638741HNLRIR12", "CreditCard".toUpperCase());
-        dao.addReservation("NMS234", "MARC650607HNLRIR07", "CreditCard".toUpperCase());
+        dao.addReservation("KPM123", "Cash".toUpperCase(), "MARC650607HNLRIR07");
+        dao.addReservation("AVD691", "CreditCard".toUpperCase(), "ASDJ638741HNLRIR12");
+        dao.addReservation("LKD231", "DebitCard".toUpperCase(), "LOKD250607HNLKJR04");
+        dao.addReservation("GJK986", "Invoice".toUpperCase(), "MARC650607HNLRIR07");
+        dao.addReservation("KJD763", "CreditCard".toUpperCase(), "ASDJ638741HNLRIR12");
+        dao.addReservation("SJF235", "DebitCard".toUpperCase(), "LOKD250607HNLKJR04");
+        dao.addReservation("OIF236", "Cash".toUpperCase(), "MARC650607HNLRIR07");
+        dao.addReservation("SKJ234", "CreditCard".toUpperCase(), "LOKD250607HNLKJR04");
+        dao.addReservation("AQW862", "Invoice".toUpperCase(), "LOKD250607HNLKJR04");
+        dao.addReservation("KFJ823", "CreditCard".toUpperCase(), "ASDJ638741HNLRIR12");
+        dao.addReservation("NMS234", "CreditCard".toUpperCase(), "MARC650607HNLRIR07");
 
         //Insert airports
         dao.addAirport("MEX", "Mexico City", "Mexico", "Benito Juarez International Airport");

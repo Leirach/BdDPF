@@ -5,10 +5,10 @@ public class Reservation {
     private String passenger;
     private String payment;
 
-    public Reservation(String code, String passenger, String payment) {
+    public Reservation(String code, String payment, String passenger) {
         this.code = code;
-        this.passenger = passenger;
         this.payment = payment;
+        this.passenger = passenger;
     }
 
     public String getCode() {
