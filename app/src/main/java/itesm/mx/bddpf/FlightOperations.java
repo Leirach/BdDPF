@@ -99,19 +99,19 @@ public class FlightOperations {
         return newRowId;
     }
 
-    public long addReservation(String reservationCode, String paymentInfo, String passengerID) {
-        long newRowId = 0;
+    public boolean addReservation(String reservationCode, String paymentInfo, String passengerID) {
         try {
             ContentValues values = new ContentValues();
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_RESERVATION_CODE, reservationCode);
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION, paymentInfo);
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER, passengerID);
 
-            newRowId = db.insert(DataBaseSchema.Reservation.TABLE_NAME, null, values);
+            db.insert(DataBaseSchema.Reservation.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
+            return false;
         }
-        return newRowId;
+        return true;
     }
 
     public long addAirport(String airportCode, String city, String country, String name) {

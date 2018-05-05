@@ -1,5 +1,6 @@
 package itesm.mx.bddpf;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -125,8 +126,8 @@ public class ReservationsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start add activity
-                Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT).show();
+                Intent addReservation = new Intent(getApplicationContext(), AddNewReservationActivity.class);
+                startActivity(addReservation);
             }
         });
     }
@@ -167,5 +168,17 @@ public class ReservationsActivity extends AppCompatActivity {
     public void setReservationsList() {
         reservationAdapter = new ReservationAdapter(this, reservations);
         listView.setAdapter(reservationAdapter);
+    }
+
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
     }
 }
