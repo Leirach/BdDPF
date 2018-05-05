@@ -17,6 +17,7 @@ public class ReservationsActivity extends AppCompatActivity {
     private FlightOperations dao;
     private AutoCompleteTextView actv_Passenger;
     private AutoCompleteTextView actv_Payment;
+    private AutoCompleteTextView actv_Name;
     private ArrayList<Reservation> reservations;
     private ReservationAdapter reservationAdapter;
     private ListView listView;
@@ -86,6 +87,37 @@ public class ReservationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 actv_Payment.showDropDown();
+            }
+        });
+
+        ArrayAdapter<String> adapterPassengerNames = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerNames());
+        actv_Name = (AutoCompleteTextView) findViewById(R.id.edit_name);
+        actv_Name.setThreshold(0);
+        actv_Name.setAdapter(adapterPassengerNames);
+        actv_Name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                reservations = dao.getAllReservationsWithPassengerName(actv_Name.getText().toString());
+                reservationAdapter = new ReservationAdapter(getApplicationContext(), reservations);
+                setReservationsList();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        actv_Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Name.showDropDown();
             }
         });
 
