@@ -345,6 +345,32 @@ public class FlightOperations {
         return listReservations;
     }
 
+
+    //return specific passenger
+    public Passenger getPassenger(String passengerID) {
+        Passenger passenger;
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Passenger.TABLE_NAME +
+                " WHERE " + DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_ID + "=\'" + passengerID + "\'";
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    passenger = new Passenger(cursor.getString(1), cursor.getString(2),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                            cursor.getString(9), cursor.getString(10), cursor.getString(11),
+                            cursor.getString(12));
+
+                    return passenger;
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return null;
+    }
+
     //Get all passengers from the DB
     public ArrayList<Passenger> getAllPassengers() {
         ArrayList<Passenger> listPassengers = new ArrayList<>();
