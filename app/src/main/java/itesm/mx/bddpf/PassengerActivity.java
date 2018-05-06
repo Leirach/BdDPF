@@ -1,5 +1,6 @@
 package itesm.mx.bddpf;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -59,7 +60,10 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent passengerDetail = new Intent(this, PassengerDetailActivity.class);
+        Passenger passenger = (Passenger) parent.getItemAtPosition(position);
+        passengerDetail.putExtra(PassengerDetailActivity.PASSENGER_KEY, passenger.getPassengerID());
+        startActivity(passengerDetail);
     }
 
     public void searchPassengers() {

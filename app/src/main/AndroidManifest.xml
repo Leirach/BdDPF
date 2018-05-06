@@ -17,10 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".PassengerActivity" />
+        <activity android:name=".PassengerDetailActivity"/>
         <activity android:name=".ReservationsActivity" />
         <activity android:name=".TicketsActivity" />
         <activity android:name=".FlightsActivity" />
-        <activity android:name=".FlightDetailActivity"></activity>
+        <activity android:name=".FlightDetailActivity"/>
     </application>
 
 </manifest>

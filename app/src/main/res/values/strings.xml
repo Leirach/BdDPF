@@ -19,4 +19,9 @@
     <string name="numero_cel">Num cel:</string>
     <string name="numero_fijo">Num fijo:</string>
     <string name="email">Email:</string>
+    <string name="curp">CURP:</string>
+    <string name="tipo">Pasajero tipo:</string>
+    <string name="dir">Dirección:</string>
+    <string name="zip">Código postal:</string>
+    <string name="estado">Estado:</string>
 </resources>
