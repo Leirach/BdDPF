@@ -99,19 +99,19 @@ public class FlightOperations {
         return newRowId;
     }
 
-    public long addReservation(String reservationCode, String paymentInfo, String passengerID) {
-        long newRowId = 0;
+    public boolean addReservation(String reservationCode, String paymentInfo, String passengerID) {
         try {
             ContentValues values = new ContentValues();
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_RESERVATION_CODE, reservationCode);
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION, paymentInfo);
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER, passengerID);
 
-            newRowId = db.insert(DataBaseSchema.Reservation.TABLE_NAME, null, values);
+            db.insert(DataBaseSchema.Reservation.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
+            return false;
         }
-        return newRowId;
+        return true;
     }
 
     public long addAirport(String airportCode, String city, String country, String name) {
@@ -443,6 +443,23 @@ public class FlightOperations {
         return listPassengers;
     }
 
+    public ArrayList<String> getUniquePassengerNames() {
+        ArrayList<String> listPassengers = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME + " FROM " + DataBaseSchema.Passenger.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listPassengers.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listPassengers;
+    }
+
     public ArrayList<String> getUniquePayments() {
         ArrayList<String> listPayments = new ArrayList<String>();
         String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " FROM " + DataBaseSchema.Reservation.TABLE_NAME;
@@ -463,7 +480,7 @@ public class FlightOperations {
 
     public ArrayList<Reservation> getAllReservationsWithPayment(String payment) {
         ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + "=\"" + payment + "\"";
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " LIKE '" + payment + "%'";
         Reservation reservation;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);
@@ -482,7 +499,28 @@ public class FlightOperations {
 
     public ArrayList<Reservation> getAllReservationsWithPassenger(String passenger) {
         ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + "=\"" + passenger + "\"";
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " LIKE '" + passenger + "%'";
+        Reservation reservation;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                    listReservations.add(reservation);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listReservations;
+    }
+
+    public ArrayList<Reservation> getAllReservationsWithPassengerName(String name) {
+        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " = (SELECT " +
+                 DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_ID + " FROM " + DataBaseSchema.Passenger.TABLE_NAME + " WHERE " + DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME +
+                " LIKE '" +  name + "%')";
         Reservation reservation;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);
@@ -501,7 +539,7 @@ public class FlightOperations {
 
     public ArrayList<Reservation> getAllReservationsWithPassAndPay(String passenger, String payment) {
         ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + "=\"" + passenger + "\" AND " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + "=\"" + payment + "\"";
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " LIKE '" + passenger + "%' AND " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " LIKE '" + payment + "%'";
         Reservation reservation;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);

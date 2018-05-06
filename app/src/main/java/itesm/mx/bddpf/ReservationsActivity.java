@@ -1,5 +1,7 @@
 package itesm.mx.bddpf;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class ReservationsActivity extends AppCompatActivity {
     private FlightOperations dao;
     private AutoCompleteTextView actv_Passenger;
     private AutoCompleteTextView actv_Payment;
+    private AutoCompleteTextView actv_Name;
     private ArrayList<Reservation> reservations;
     private ReservationAdapter reservationAdapter;
     private ListView listView;
@@ -86,6 +90,46 @@ public class ReservationsActivity extends AppCompatActivity {
                 actv_Payment.showDropDown();
             }
         });
+
+        ArrayAdapter<String> adapterPassengerNames = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerNames());
+        actv_Name = (AutoCompleteTextView) findViewById(R.id.edit_name);
+        actv_Name.setThreshold(0);
+        actv_Name.setAdapter(adapterPassengerNames);
+        actv_Name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                reservations = dao.getAllReservationsWithPassengerName(actv_Name.getText().toString());
+                reservationAdapter = new ReservationAdapter(getApplicationContext(), reservations);
+                setReservationsList();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        actv_Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Name.showDropDown();
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addReservation = new Intent(getApplicationContext(), AddNewReservationActivity.class);
+                startActivity(addReservation);
+            }
+        });
     }
 
     public void searchReservations(){
@@ -124,5 +168,17 @@ public class ReservationsActivity extends AppCompatActivity {
     public void setReservationsList() {
         reservationAdapter = new ReservationAdapter(this, reservations);
         listView.setAdapter(reservationAdapter);
+    }
+
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
     }
 }

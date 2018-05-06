@@ -1,67 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PassengerActivity">
+    tools:context=".AddNewReservationActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nombre"/>
-            <AutoCompleteTextView
-                android:layout_width="100dp"
+                android:text="Code: "/>
+            <EditText
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_nombre"/>
+                android:id="@+id/edit_code"
+                android:hint="LKDJFD"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pais"/>
-            <AutoCompleteTextView
-                android:layout_width="100dp"
+                android:text="Passenger: "/>
+            <EditText
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_pais"/>
+                android:id="@+id/edit_passenger"
+                android:hint="SADLOK123431SADA231"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ciudad"/>
-            <AutoCompleteTextView
-                android:layout_width="100dp"
+                android:text="Payment: "/>
+            <EditText
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_ciudad"/>
+                android:id="@+id/edit_payment"
+                android:hint="CREDITCARD"/>
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview">
-
-    </ListView>
-    <!-- this was in master, changed the layout from Relative to Linear -->
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="add"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="40dp"
-        android:src="@mipmap/ic_add_black_24dp" />
-
-</LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_margin="50dp"
+        android:id="@+id/btn_add"/>
+</RelativeLayout>
