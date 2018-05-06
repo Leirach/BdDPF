@@ -6,12 +6,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_date"
+        android:id="@+id/text_to_terminal"
         android:text="Mon 23/02-2018 22:00"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_date"
+        android:layout_below="@id/text_to_terminal"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
         android:id="@+id/ll_first">
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/ll_first"
-        android:layout_below="@id/text_date"
+        android:layout_below="@id/text_to_terminal"
         android:id="@+id/ll_second"
         android:orientation="vertical">
         <TextView
@@ -54,7 +54,7 @@
         android:layout_toEndOf="@id/ll_second"
         android:id="@+id/ll_third"
         android:layout_marginStart="10dp"
-        android:layout_below="@id/text_date"
+        android:layout_below="@id/text_to_terminal"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_date"
+        android:layout_below="@id/text_to_terminal"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@id/ll_third"
         android:id="@+id/ll_fourth"
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/ll_fourth"
         android:layout_marginStart="10dp"
-        android:layout_below="@id/text_date"
+        android:layout_below="@id/text_to_terminal"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"

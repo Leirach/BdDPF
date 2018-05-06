@@ -29,7 +29,7 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         TextView tvFlightDestination = (TextView) convertView.findViewById(R.id.text_to);
         TextView tvFlightDestinationTerminal = (TextView) convertView.findViewById(R.id.text_to_terminal);
         TextView tvFlightDestinationGate = (TextView) convertView.findViewById(R.id.text_to_gate);
-        TextView tvDate = (TextView) convertView.findViewById(R.id.text_date);
+        TextView tvDate = (TextView) convertView.findViewById(R.id.text_to_terminal);
 
         tvFlightID.setText(flight.getFlightID());
         tvFlightOrigin.setText(flight.getAirportOrigin());
