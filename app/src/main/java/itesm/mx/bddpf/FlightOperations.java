@@ -524,5 +524,115 @@ public class FlightOperations {
         }
         return listReservations;
     }
+
+    public ArrayList<String> getUniqueAirports() {
+        ArrayList<String> listAirports = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.AirportTable.COLUMN_NAME_NAME + " FROM " + DataBaseSchema.AirportTable.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listAirports.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirports;
+    }
+
+    public ArrayList<String> getUniqueAirportCountries() {
+        ArrayList<String> listAirports = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.AirportTable.COLUMN_NAME_COUNTRY + " FROM " + DataBaseSchema.AirportTable.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listAirports.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirports;
+    }
+
+    public ArrayList<String> getUniqueAirportCities() {
+        ArrayList<String> listAirports = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.AirportTable.COLUMN_NAME_CITY + " FROM " + DataBaseSchema.AirportTable.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listAirports.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirports;
+    }
+
+    public ArrayList<String> getUniqueAirportCodes() {
+        ArrayList<String> listAirports = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.AirportTable.COLUMN_NAME_AIRPORT_CODE + " FROM " + DataBaseSchema.AirportTable.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listAirports.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirports;
+    }
+
+    public ArrayList<Airport> getAllAirports() {
+        ArrayList<Airport> listAirports = new ArrayList<Airport>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.AirportTable.TABLE_NAME;
+        Airport airport;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airport = new Airport(cursor.getString(4), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                    listAirports.add(airport);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirports;
+    }
+
+    public ArrayList<Airport> airportQuery(String name, String code, String city, String country){
+        ArrayList<Airport> listAirports = new ArrayList<Airport>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.AirportTable.TABLE_NAME + " WHERE " +
+                DataBaseSchema.AirportTable.COLUMN_NAME_NAME + " LIKE '%" + name + "%' AND " +
+                DataBaseSchema.AirportTable.COLUMN_NAME_AIRPORT_CODE + " LIKE '%" + code + "%'" +
+                " AND " + DataBaseSchema.AirportTable.COLUMN_NAME_CITY + " LIKE '%" + city + "%'" +
+                " AND " + DataBaseSchema.AirportTable.COLUMN_NAME_COUNTRY + " LIKE '%" + country + "%'";
+        Airport airport;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airport = new Airport(cursor.getString(4), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                    listAirports.add(airport);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirports;
+    }
 }
 

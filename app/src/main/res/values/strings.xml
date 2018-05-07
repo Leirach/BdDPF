@@ -27,4 +27,8 @@
     <string name="estado">Estado:</string>
     <string name="apellido">Apellido:</string>
     <string name="ciudad">Ciudad:</string>
+    <string name="emptydatabase">reiniciar base de datos</string>
+    <string name="airports">aeropuertos</string>
+    <string name="airplane">Aviones</string>
+    <string name="Code">Codigo:</string>
 </resources>
