@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ReservationsActivity extends AppCompatActivity implements TextWatcher {
+public class ReservationsActivity extends AppCompatActivity implements TextWatcher, ListView.OnItemClickListener {
     private FlightOperations dao;
     private AutoCompleteTextView actv_Passenger;
     private AutoCompleteTextView actv_Payment;
@@ -35,6 +36,7 @@ public class ReservationsActivity extends AppCompatActivity implements TextWatch
         reservations = dao.getAllReservations();
         reservationAdapter = new ReservationAdapter(this, reservations);
         listView.setAdapter(reservationAdapter);
+        listView.setOnItemClickListener(this);
 
         ArrayAdapter<String> adapterPassenger = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengers());
         actv_Passenger = (AutoCompleteTextView) findViewById(R.id.edit_passenger);
@@ -129,5 +131,13 @@ public class ReservationsActivity extends AppCompatActivity implements TextWatch
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Reservation reservation = (Reservation) parent.getItemAtPosition(position);
+        Intent openDetailReservation = new Intent(this, ReservationDetailActivity.class);
+        openDetailReservation.putExtra(ReservationDetailActivity.CODE_KEY, reservation.getCode());
+        startActivity(openDetailReservation);
     }
 }
