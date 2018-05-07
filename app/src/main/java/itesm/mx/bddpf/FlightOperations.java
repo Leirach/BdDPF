@@ -73,6 +73,11 @@ public class FlightOperations {
         return newRowId;
     }
 
+    //drop all tables
+    public void dropAllTables() {
+        dbHelper.onUpgrade(db, 0, 0);
+    }
+
     public long addPassenger(String passengerID, String type, String cellNumber, String fixedNumber,
                              String firstName, String lastName, String email, String streetAddress,
                              String postalCode, String city, String state, String country) {

@@ -34,7 +34,7 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger);
 
-        //Merged with my branch, what is this code?
+        //add new passenger?
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

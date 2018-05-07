@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fillDatabase();
                 break;
             case R.id.btn_empty:
-                //
+                dao.dropAllTables();
                 break;
         }
     }
