@@ -30,14 +30,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btnTickets = (Button) findViewById(R.id.btn_seeTickets);
         Button btnReservations = (Button) findViewById(R.id.btn_seeReservations);
         Button btnFillDB = (Button) findViewById(R.id.btn_fillDB);
-        Button btn = (Button) findViewById(R.id.btn_empty);
+        Button btnClearDB = (Button) findViewById(R.id.btn_empty);
+        Button btnAirplanes = (Button) findViewById(R.id.btn_airplanes);
+        Button btnAirports = (Button) findViewById(R.id.btn_airport);
 
         btnPassengers.setOnClickListener(this);
         btnFlights.setOnClickListener(this);
         btnReservations.setOnClickListener(this);
         btnTickets.setOnClickListener(this);
         btnFillDB.setOnClickListener(this);
-        btn.setOnClickListener(this);
+        btnClearDB.setOnClickListener(this);
+        btnAirplanes.setOnClickListener(this);
+        btnAirports.setOnClickListener(this);
 
     }
 
@@ -59,6 +63,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_seeTickets:
                 Intent ticketsActivity = new Intent(this, TicketsActivity.class);
                 startActivity(ticketsActivity);
+                break;
+            case R.id.btn_airplanes:
+                Intent airplanesActivity = new Intent(this, AirplanesActivity.class);
+                startActivity(airplanesActivity);
+                break;
+            case R.id.btn_airport:
+                Intent airportsActivity = new Intent(this, AirportsActivity.class);
+                startActivity(airportsActivity);
                 break;
             case R.id.btn_fillDB:
                 fillDatabase();
