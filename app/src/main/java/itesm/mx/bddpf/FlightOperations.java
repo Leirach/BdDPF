@@ -311,6 +311,28 @@ public class FlightOperations {
         return null;
     }
 
+    //return specific reservation
+    public Reservation getReservation(String reservationCode) {
+        Reservation reservation;
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME +
+                " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_RESERVATION_CODE + "=\'" + reservationCode + "\'";
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    reservation = new Reservation(cursor.getString(0), cursor.getString(1),
+                            cursor.getString(2));
+
+                    return reservation;
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return null;
+    }
+
     //Get all passengers from the DB
     public ArrayList<Passenger> getAllPassengers() {
         ArrayList<Passenger> listPassengers = new ArrayList<>();
