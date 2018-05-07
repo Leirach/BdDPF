@@ -168,23 +168,6 @@ public class FlightOperations {
         return newRowId;
     }
 
-    public ArrayList<String> getAllFlightIDs() {
-        ArrayList<String> listFlightIDs = new ArrayList<String>();
-        String selectQuery = "SELECT " + DataBaseSchema.FlightTable.COLUMN_NAME_FLIGHT_ID + " FROM " + DataBaseSchema.FlightTable.TABLE_NAME;
-        try {
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    listFlightIDs.add(cursor.getString(0));
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (SQLException e) {
-            Log.e("SQLLIST", e.toString());
-        }
-        return listFlightIDs;
-    }
-
     public ArrayList<String> getUniqueOrigins() {
         ArrayList<String> listOrigins = new ArrayList<String>();
         String selectQuery = "SELECT DISTINCT " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + " FROM " + DataBaseSchema.FlightTable.TABLE_NAME;
@@ -241,53 +224,11 @@ public class FlightOperations {
         return listFlights;
     }
 
-    public ArrayList<Flight> getAllFlightsFrom(String airportOrigin) {
-        ArrayList<Flight> listFlights = new ArrayList<Flight>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + "=\"" + airportOrigin + "\"";
-        Flight flight;
-        try {
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
-                            cursor.getInt(3), cursor.getString(4), cursor.getString(5),
-                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
-                            cursor.getString(9), cursor.getString(10));
-                    listFlights.add(flight);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (SQLException e) {
-            Log.e("SQLLIST", e.toString());
-        }
-        return listFlights;
-    }
-
-    public ArrayList<Flight> getAllFlightsTo(String airportDestination) {
-        ArrayList<Flight> listFlights = new ArrayList<Flight>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_DESTINATION + "=\"" + airportDestination + "\"";
-        Flight flight;
-        try {
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    flight = new Flight(cursor.getString(1), loadDate(cursor.getLong(2)),
-                            cursor.getInt(3), cursor.getString(4), cursor.getString(5),
-                            cursor.getString(6), cursor.getString(7), cursor.getString(8),
-                            cursor.getString(9), cursor.getString(10));
-                    listFlights.add(flight);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (SQLException e) {
-            Log.e("SQLLIST", e.toString());
-        }
-        return listFlights;
-    }
-
     public ArrayList<Flight> getAllFlightsFromTo(String airportOrigin, String airportDestination) {
         ArrayList<Flight> listFlights = new ArrayList<Flight>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + "=\"" + airportOrigin + "\" AND " + DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_DESTINATION + "=\"" + airportDestination + "\"";
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.FlightTable.TABLE_NAME + " WHERE " +
+                DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_ORIGIN + " LIKE '%" + airportOrigin + "%' AND " +
+                DataBaseSchema.FlightTable.COLUMN_NAME_AIRPORT_DESTINATION + " LIKE '%" + airportDestination + "%'";
         Flight flight;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);
@@ -344,7 +285,6 @@ public class FlightOperations {
         }
         return listReservations;
     }
-
 
     //return specific passenger
     public Passenger getPassenger(String passengerID) {
@@ -406,7 +346,11 @@ public class FlightOperations {
             queryBuilder.append("WHERE " + DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME + " LIKE \'" + name + "%\'");
         }
 
-        String selectQuery = queryBuilder.toString();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Passenger.TABLE_NAME + " WHERE " +
+                DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME + " LIKE '%" + name + "%' AND " +
+                DataBaseSchema.Passenger.COLUMN_NAME_LAST_NAME + " LIKE '%" + lastname + "%' AND " +
+                DataBaseSchema.Passenger.COLUMN_NAME_CITY + " LIKE '%" + city + "%' AND " +
+                DataBaseSchema.Passenger.COLUMN_NAME_COUNTRY + " LIKE '%" + country + "%'";
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);
             if (cursor.moveToFirst()) {
@@ -478,68 +422,15 @@ public class FlightOperations {
     }
 
 
-    public ArrayList<Reservation> getAllReservationsWithPayment(String payment) {
+    public ArrayList<Reservation> getAllReservationsWith(String passenger, String payment, String passengerName) {
         ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " LIKE '" + payment + "%'";
-        Reservation reservation;
-        try {
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-                    listReservations.add(reservation);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (SQLException e) {
-            Log.e("SQLLIST", e.toString());
-        }
-        return listReservations;
-    }
-
-    public ArrayList<Reservation> getAllReservationsWithPassenger(String passenger) {
-        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " LIKE '" + passenger + "%'";
-        Reservation reservation;
-        try {
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-                    listReservations.add(reservation);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (SQLException e) {
-            Log.e("SQLLIST", e.toString());
-        }
-        return listReservations;
-    }
-
-    public ArrayList<Reservation> getAllReservationsWithPassengerName(String name) {
-        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " = (SELECT " +
-                 DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_ID + " FROM " + DataBaseSchema.Passenger.TABLE_NAME + " WHERE " + DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME +
-                " LIKE '" +  name + "%')";
-        Reservation reservation;
-        try {
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    reservation = new Reservation(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-                    listReservations.add(reservation);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (SQLException e) {
-            Log.e("SQLLIST", e.toString());
-        }
-        return listReservations;
-    }
-
-    public ArrayList<Reservation> getAllReservationsWithPassAndPay(String passenger, String payment) {
-        ArrayList<Reservation> listReservations = new ArrayList<Reservation>();
-        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " LIKE '" + passenger + "%' AND " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " LIKE '" + payment + "%'";
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Reservation.TABLE_NAME + " WHERE " +
+                DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " LIKE '%" + passenger + "%' AND " +
+                DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " LIKE '%" + payment + "%'" +
+                " AND " + DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER + " IN (SELECT " +
+                DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_ID + " FROM " + DataBaseSchema.Passenger.TABLE_NAME +
+                " WHERE " + DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME +
+                " LIKE '%" +  passengerName + "%')";
         Reservation reservation;
         try {
             Cursor cursor = db.rawQuery(selectQuery, null);

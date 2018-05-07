@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ReservationsActivity extends AppCompatActivity {
+public class ReservationsActivity extends AppCompatActivity implements TextWatcher {
     private FlightOperations dao;
     private AutoCompleteTextView actv_Passenger;
     private AutoCompleteTextView actv_Payment;
@@ -33,28 +33,14 @@ public class ReservationsActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listview);
         reservations = dao.getAllReservations();
-        setReservationsList();
+        reservationAdapter = new ReservationAdapter(this, reservations);
+        listView.setAdapter(reservationAdapter);
 
         ArrayAdapter<String> adapterPassenger = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengers());
         actv_Passenger = (AutoCompleteTextView) findViewById(R.id.edit_passenger);
         actv_Passenger.setThreshold(0);
         actv_Passenger.setAdapter(adapterPassenger);
-        actv_Passenger.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchReservations();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actv_Passenger.addTextChangedListener(this);
 
         actv_Passenger.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,22 +53,7 @@ public class ReservationsActivity extends AppCompatActivity {
         actv_Payment = (AutoCompleteTextView) findViewById(R.id.edit_payment);
         actv_Payment.setThreshold(0);
         actv_Payment.setAdapter(adapterPayment);
-        actv_Payment.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchReservations();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actv_Payment.addTextChangedListener(this);
 
         actv_Payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,25 +66,7 @@ public class ReservationsActivity extends AppCompatActivity {
         actv_Name = (AutoCompleteTextView) findViewById(R.id.edit_name);
         actv_Name.setThreshold(0);
         actv_Name.setAdapter(adapterPassengerNames);
-        actv_Name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                reservations = dao.getAllReservationsWithPassengerName(actv_Name.getText().toString());
-                reservationAdapter = new ReservationAdapter(getApplicationContext(), reservations);
-                setReservationsList();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actv_Name.addTextChangedListener(this);
 
         actv_Name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,46 +80,27 @@ public class ReservationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent addReservation = new Intent(getApplicationContext(), AddNewReservationActivity.class);
-                startActivity(addReservation);
+                startActivityForResult(addReservation, 0);
             }
         });
     }
 
-    public void searchReservations(){
-        String passengerSelected = actv_Passenger.getText().toString().toUpperCase();
-        String paymentSelected = actv_Payment.getText().toString().toUpperCase();
-        if (passengerSelected.length() != 0 && paymentSelected.length() != 0) {
-            reservationsWithPassAndPay(passengerSelected, paymentSelected);
-        } else if (passengerSelected.length() == 0 && paymentSelected.length() != 0) {
-            reservationsWithPayment(paymentSelected);
-        } else if (passengerSelected.length() != 0 && paymentSelected.length() == 0) {
-            reservationsWithPassenger(passengerSelected);
-        } else {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            onResume();
             reservations = dao.getAllReservations();
-            setReservationsList();
+            reservationAdapter = new ReservationAdapter(this, reservations);
+            listView.setAdapter(reservationAdapter);
         }
     }
 
-    public void reservationsWithPayment(String paymentSelected) {
-        reservations = dao.getAllReservationsWithPayment(paymentSelected);
+    public void searchReservations(){
+        String passengerNameSelected = actv_Name.getText().toString();
+        String passengerSelected = actv_Passenger.getText().toString().toUpperCase();
+        String paymentSelected = actv_Payment.getText().toString().toUpperCase();
+        reservations = dao.getAllReservationsWith(passengerSelected, paymentSelected, passengerNameSelected);
         reservationAdapter = new ReservationAdapter(getApplicationContext(), reservations);
-        setReservationsList();
-    }
-
-    public void reservationsWithPassenger(String passengerSelected) {
-        reservations = dao.getAllReservationsWithPassenger(passengerSelected);
-        reservationAdapter = new ReservationAdapter(getApplicationContext(), reservations);
-        setReservationsList();
-    }
-
-    public void reservationsWithPassAndPay(String passengerSelected, String paymentSelected) {
-        reservations = dao.getAllReservationsWithPassAndPay(passengerSelected, paymentSelected);
-        reservationAdapter = new ReservationAdapter(getApplicationContext(), reservations);
-        setReservationsList();
-    }
-
-    public void setReservationsList() {
-        reservationAdapter = new ReservationAdapter(this, reservations);
         listView.setAdapter(reservationAdapter);
     }
 
@@ -180,5 +114,20 @@ public class ReservationsActivity extends AppCompatActivity {
     protected void onResume() {
         dao.open();
         super.onResume();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        searchReservations();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }

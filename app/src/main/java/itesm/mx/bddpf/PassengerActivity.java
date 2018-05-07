@@ -18,13 +18,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PassengerActivity extends AppCompatActivity implements ListView.OnItemClickListener {
+public class PassengerActivity extends AppCompatActivity implements ListView.OnItemClickListener, TextWatcher {
 
     private FlightOperations dao;
     private ArrayList<Passenger> passengers;
     private PassengerAdapter passengerAdapter;
     private ListView listView;
     AutoCompleteTextView actv_Name;
+    AutoCompleteTextView actv_lastName;
+    AutoCompleteTextView actv_city;
     AutoCompleteTextView actv_Country;
 
     @Override
@@ -54,22 +56,22 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         actv_Name = (AutoCompleteTextView) findViewById(R.id.edit_nombre);
         actv_Name.setThreshold(0);
         actv_Name.setAdapter(adapterOrigin);
-        actv_Name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        actv_Name.addTextChangedListener(this);
 
-            }
+        actv_Country = (AutoCompleteTextView) findViewById(R.id.edit_pais);
+        actv_Country.setThreshold(0);
+        actv_Country.setAdapter(adapterOrigin);
+        actv_Country.addTextChangedListener(this);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchPassengers();
-            }
+        actv_city = (AutoCompleteTextView) findViewById(R.id.edit_ciudad);
+        actv_city.setThreshold(0);
+        actv_city.setAdapter(adapterOrigin);
+        actv_city.addTextChangedListener(this);
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actv_lastName = (AutoCompleteTextView) findViewById(R.id.edit_apellido);
+        actv_lastName.setThreshold(0);
+        actv_lastName.setAdapter(adapterOrigin);
+        actv_lastName.addTextChangedListener(this);
     }
 
     @Override
@@ -82,20 +84,34 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
 
     public void searchPassengers() {
         String passengerNameSelected = actv_Name.getText().toString().toUpperCase();
-        //String passengerCountrySelected = actv_Country.getText().toString().toUpperCase();
-        if (passengerNameSelected.length() != 0) {
-            updateList(passengerNameSelected, "", "", "");
-        }
+        String passengerCountrySelected = actv_Country.getText().toString().toUpperCase();
+        String passengerLastNameSelected = actv_lastName.getText().toString().toUpperCase();
+        String passengerCitySelected = actv_city.getText().toString().toUpperCase();
+        updateList(passengerNameSelected, passengerLastNameSelected, passengerCitySelected, passengerCountrySelected);
     }
 
     private void updateList(String passengerFName, String passengerLName, String passengerCity, String passengerCountry) {
         passengers = dao.passengerQuery(passengerFName, passengerLName, passengerCity, passengerCountry);
-        passengerAdapter = new PassengerAdapter(getApplicationContext(), passengers);
         setPassengerList();
     }
 
     public void setPassengerList() {
         passengerAdapter = new PassengerAdapter(this, passengers);
         listView.setAdapter(passengerAdapter);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        searchPassengers();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
