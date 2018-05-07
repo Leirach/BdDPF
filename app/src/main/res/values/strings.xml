@@ -17,7 +17,6 @@
     <string name="name">Nombre:</string>
     <string name="nombre">Nombre:</string>
     <string name="pais">País:</string>
-    <string name="ciudad">Ciudad:</string>
     <string name="numero_cel">Num cel:</string>
     <string name="numero_fijo">Num fijo:</string>
     <string name="email">Email:</string>
@@ -26,4 +25,6 @@
     <string name="dir">Dirección:</string>
     <string name="zip">Código postal:</string>
     <string name="estado">Estado:</string>
+    <string name="apellido">Apellido:</string>
+    <string name="ciudad">Ciudad:</string>
 </resources>

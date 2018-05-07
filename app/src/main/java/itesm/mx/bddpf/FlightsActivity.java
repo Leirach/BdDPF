@@ -108,28 +108,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
     public void searchFlights(){
         String airportOriginSelected = actv_Origins.getText().toString().toUpperCase();
         String airportDestinationSelected = actv_Destinations.getText().toString().toUpperCase();
-        if (airportOriginSelected.length() != 0 && airportDestinationSelected.length() != 0) {
-            airportsToFrom(airportOriginSelected, airportDestinationSelected);
-        } else if (airportOriginSelected.length() == 0 && airportDestinationSelected.length() != 0) {
-            airportsTo(airportDestinationSelected);
-        } else if (airportOriginSelected.length() != 0 && airportDestinationSelected.length() == 0) {
-            airportsFrom(airportOriginSelected);
-        } else {
-            flights = dao.getAllFlights();
-            setFlightList();
-        }
-    }
-
-    public void airportsFrom(String airportOriginSelected) {
-        flights = dao.getAllFlightsFrom(airportOriginSelected);
-        flightAdapter = new FlightAdapter(getApplicationContext(), flights);
-        setFlightList();
-    }
-
-    public void airportsTo(String airportDestinationSelected) {
-        flights = dao.getAllFlightsTo(airportDestinationSelected);
-        flightAdapter = new FlightAdapter(getApplicationContext(), flights);
-        setFlightList();
+        airportsToFrom(airportOriginSelected, airportDestinationSelected);
     }
 
     public void airportsToFrom(String airportOriginSelected, String airportDestinationSelected) {

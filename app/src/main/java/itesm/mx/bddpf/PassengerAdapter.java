@@ -32,7 +32,7 @@ public class PassengerAdapter extends ArrayAdapter<Passenger> {
         TextView tvPassFixed = (TextView) convertView.findViewById(R.id.text_pass_fixed);
         TextView tvPassEmail = (TextView) convertView.findViewById(R.id.text_pass_email);
 
-        tvPassName.setText(passenger.getFirstName()); //+ " " + passenger.getLastName()
+        tvPassName.setText(passenger.getFirstName() + " " + passenger.getLastName());
         tvPassCountry.setText(passenger.getCountry());
         tvPassCity.setText(passenger.getCity());
         tvPassCell.setText(passenger.getNumberCell());
