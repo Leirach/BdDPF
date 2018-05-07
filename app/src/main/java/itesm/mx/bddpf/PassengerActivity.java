@@ -52,25 +52,28 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         passengers = dao.getAllPassengers();
         setPassengerList();
 
-        ArrayAdapter<String> adapterOrigin = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueOrigins());
+        ArrayAdapter<String> adapterFirstName = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerNames());
         actv_Name = (AutoCompleteTextView) findViewById(R.id.edit_nombre);
         actv_Name.setThreshold(0);
-        actv_Name.setAdapter(adapterOrigin);
+        actv_Name.setAdapter(adapterFirstName);
         actv_Name.addTextChangedListener(this);
 
+        ArrayAdapter<String> adapterCountry = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerCountries());
         actv_Country = (AutoCompleteTextView) findViewById(R.id.edit_pais);
         actv_Country.setThreshold(0);
-        actv_Country.setAdapter(adapterOrigin);
+        actv_Country.setAdapter(adapterCountry);
         actv_Country.addTextChangedListener(this);
 
+        ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerCities());
         actv_city = (AutoCompleteTextView) findViewById(R.id.edit_ciudad);
         actv_city.setThreshold(0);
-        actv_city.setAdapter(adapterOrigin);
+        actv_city.setAdapter(adapterCity);
         actv_city.addTextChangedListener(this);
 
+        ArrayAdapter<String> adapterLastname = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerLastNames());
         actv_lastName = (AutoCompleteTextView) findViewById(R.id.edit_apellido);
         actv_lastName.setThreshold(0);
-        actv_lastName.setAdapter(adapterOrigin);
+        actv_lastName.setAdapter(adapterLastname);
         actv_lastName.addTextChangedListener(this);
     }
 

@@ -404,6 +404,57 @@ public class FlightOperations {
         return listPassengers;
     }
 
+    public ArrayList<String> getUniquePassengerLastNames() {
+        ArrayList<String> listPassengers = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Passenger.COLUMN_NAME_LAST_NAME + " FROM " + DataBaseSchema.Passenger.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listPassengers.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listPassengers;
+    }
+
+    public ArrayList<String> getUniquePassengerCities() {
+        ArrayList<String> listPassengers = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Passenger.COLUMN_NAME_CITY + " FROM " + DataBaseSchema.Passenger.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listPassengers.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listPassengers;
+    }
+
+    public ArrayList<String> getUniquePassengerCountries() {
+        ArrayList<String> listPassengers = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Passenger.COLUMN_NAME_COUNTRY + " FROM " + DataBaseSchema.Passenger.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listPassengers.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listPassengers;
+    }
+
     public ArrayList<String> getUniquePayments() {
         ArrayList<String> listPayments = new ArrayList<String>();
         String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION + " FROM " + DataBaseSchema.Reservation.TABLE_NAME;
