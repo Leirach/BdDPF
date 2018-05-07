@@ -612,6 +612,25 @@ public class FlightOperations {
         return listAirports;
     }
 
+    public ArrayList<Airplane> getAllAirplanes() {
+        ArrayList<Airplane> listAirplanes = new ArrayList<Airplane>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Airplane.TABLE_NAME;
+        Airplane airplane;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airplane = new Airplane(cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                    listAirplanes.add(airplane);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirplanes;
+    }
+
     public ArrayList<Airport> airportQuery(String name, String code, String city, String country){
         ArrayList<Airport> listAirports = new ArrayList<Airport>();
         String selectQuery = "SELECT * FROM " + DataBaseSchema.AirportTable.TABLE_NAME + " WHERE " +
@@ -633,6 +652,60 @@ public class FlightOperations {
             Log.e("SQLLIST", e.toString());
         }
         return listAirports;
+    }
+
+    public ArrayList<Airplane> airplaneQuery(String id, String model){
+        ArrayList<Airplane> listAirplanes = new ArrayList<Airplane>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Airplane.TABLE_NAME + " WHERE " +
+                DataBaseSchema.Airplane.COLUMN_NAME_AIRPLANE_ID + " LIKE '%" + id + "%' AND " +
+                DataBaseSchema.Airplane.COLUMN_NAME_MODEL + " LIKE '%" + model + "%'";
+        Airplane airplane;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airplane = new Airplane(cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                    listAirplanes.add(airplane);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirplanes;
+    }
+    public ArrayList<String> getUniqueAirplaneIds() {
+        ArrayList<String> listAirplanes = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Airplane.COLUMN_NAME_AIRPLANE_ID + " FROM " + DataBaseSchema.Airplane.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listAirplanes.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirplanes;
+    }
+
+    public ArrayList<String> getUniqueAirplaneModels() {
+        ArrayList<String> listAirplanes = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Airplane.COLUMN_NAME_MODEL + " FROM " + DataBaseSchema.Airplane.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listAirplanes.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listAirplanes;
     }
 }
 

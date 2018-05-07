@@ -31,4 +31,6 @@
     <string name="airports">aeropuertos</string>
     <string name="airplane">Aviones</string>
     <string name="Code">Codigo:</string>
+    <string name="model">Model:</string>
+    <string name="ID">ID:</string>
 </resources>

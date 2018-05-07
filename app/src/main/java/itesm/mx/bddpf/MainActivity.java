@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(ticketsActivity);
                 break;
             case R.id.btn_airplanes:
-                //open airplanes
+                Intent airplanesActivity = new Intent(this, AirplanesActivity.class);
+                startActivity(airplanesActivity);
                 break;
             case R.id.btn_airport:
                 Intent airportsActivity = new Intent(this, AirportsActivity.class);
