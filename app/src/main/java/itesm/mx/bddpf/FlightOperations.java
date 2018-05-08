@@ -78,7 +78,7 @@ public class FlightOperations {
         dbHelper.onUpgrade(db, 0, 0);
     }
 
-    public long addPassenger(String passengerID, String type, String cellNumber, String fixedNumber,
+    public boolean addPassenger(String passengerID, String type, String cellNumber, String fixedNumber,
                              String firstName, String lastName, String email, String streetAddress,
                              String postalCode, String city, String state, String country) {
         long newRowId = 0;
@@ -100,8 +100,9 @@ public class FlightOperations {
             newRowId = db.insert(DataBaseSchema.Passenger.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
+            return false;
         }
-        return newRowId;
+        return true;
     }
 
     public boolean addReservation(String reservationCode, String paymentInfo, String passengerID) {

@@ -1,5 +1,7 @@
 package itesm.mx.bddpf;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,10 +47,15 @@ public class PassengerAddActivity extends AppCompatActivity implements View.OnCl
             for (int i=0; i<form.length; i++){
                 formText[i] = form[i].getText().toString();
             }
-            dao.addPassenger(formText[0], formText[1], formText[2], formText[3], formText[4], formText[5],
-                    formText[6], formText[7], formText[8], formText[9], formText[10], formText[11]);
 
-            Toast.makeText(getApplicationContext(), "Added passenger", Toast.LENGTH_SHORT).show();
+            boolean result = dao.addPassenger(formText[0], formText[1], formText[2], formText[3], formText[4], formText[5],
+                    formText[6], formText[7], formText[8], formText[9], formText[10], formText[11]);
+            if (result){
+                Toast.makeText(getApplicationContext(), "Added passenger!", Toast.LENGTH_SHORT).show();
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+            }
         }
     }
 }

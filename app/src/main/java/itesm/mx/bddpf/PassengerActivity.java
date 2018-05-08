@@ -40,7 +40,7 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
             @Override
             public void onClick(View v) {
                 Intent addPassenger = new Intent(getApplicationContext(), PassengerAddActivity.class);
-                startActivity(addPassenger);
+                startActivityForResult(addPassenger, 0);
             }
         });
 
@@ -75,6 +75,16 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         actv_lastName.setThreshold(0);
         actv_lastName.setAdapter(adapterLastname);
         actv_lastName.addTextChangedListener(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            onResume();
+            passengers = dao.getAllPassengers();
+            passengerAdapter = new PassengerAdapter(this, passengers);
+            listView.setAdapter(passengerAdapter);
+        }
     }
 
     @Override
