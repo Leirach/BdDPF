@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,12 +53,26 @@ public class AirplanesActivity extends AppCompatActivity implements ListView.OnI
         actv_Id.setThreshold(0);
         actv_Id.setAdapter(adapterId);
         actv_Id.addTextChangedListener(this);
+        actv_Id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Id.showDropDown();
+            }
+        });
 
         ArrayAdapter<String> adapterModel = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueAirplaneModels());
         actv_model = (AutoCompleteTextView) findViewById(R.id.edit_model);
         actv_model.setThreshold(0);
         actv_model.setAdapter(adapterModel);
         actv_model.addTextChangedListener(this);
+        actv_model.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_model.showDropDown();
+            }
+        });
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     @Override

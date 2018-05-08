@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -54,24 +55,49 @@ public class AirportsActivity extends AppCompatActivity implements ListView.OnIt
         actv_Name.setThreshold(0);
         actv_Name.setAdapter(adapterFirstName);
         actv_Name.addTextChangedListener(this);
+        actv_Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Name.showDropDown();
+            }
+        });
 
         ArrayAdapter<String> adapterCountry = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueAirportCountries());
         actv_Country = (AutoCompleteTextView) findViewById(R.id.edit_pais);
         actv_Country.setThreshold(0);
         actv_Country.setAdapter(adapterCountry);
         actv_Country.addTextChangedListener(this);
+        actv_Country.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Country.showDropDown();
+            }
+        });
 
         ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueAirportCities());
         actv_city = (AutoCompleteTextView) findViewById(R.id.edit_ciudad);
         actv_city.setThreshold(0);
         actv_city.setAdapter(adapterCity);
         actv_city.addTextChangedListener(this);
+        actv_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_city.showDropDown();
+            }
+        });
 
         ArrayAdapter<String> adapterCodigo = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniqueAirportCodes());
         actv_code = (AutoCompleteTextView) findViewById(R.id.edit_codigo);
         actv_code.setThreshold(0);
         actv_code.setAdapter(adapterCodigo);
         actv_code.addTextChangedListener(this);
+        actv_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_code.showDropDown();
+            }
+        });
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class FlightsActivity extends AppCompatActivity implements ListView.OnItemClickListener{
+public class FlightsActivity extends AppCompatActivity implements ListView.OnItemClickListener, TextWatcher{
     private FlightOperations dao;
     private ArrayList<Flight> flights;
     private FlightAdapter flightAdapter;
@@ -43,22 +44,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
         actv_Origins = (AutoCompleteTextView) findViewById(R.id.edit_from);
         actv_Origins.setThreshold(0);
         actv_Origins.setAdapter(adapterOrigin);
-        actv_Origins.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchFlights();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actv_Origins.addTextChangedListener(this);
 
         actv_Origins.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,22 +57,7 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
         actv_Destinations = (AutoCompleteTextView) findViewById(R.id.edit_to);
         actv_Destinations.setThreshold(0);
         actv_Destinations.setAdapter(adapterDestination);
-        actv_Destinations.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchFlights();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actv_Destinations.addTextChangedListener(this);
 
         actv_Destinations.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +74,8 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
                 Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT).show();
             }
         });
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     public void searchFlights(){
@@ -141,4 +114,19 @@ public class FlightsActivity extends AppCompatActivity implements ListView.OnIte
         dao.open();
         super.onResume();
     }
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        searchFlights();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
 }
