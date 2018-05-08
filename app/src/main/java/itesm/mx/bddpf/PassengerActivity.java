@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -57,6 +58,12 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         actv_Name.setThreshold(0);
         actv_Name.setAdapter(adapterFirstName);
         actv_Name.addTextChangedListener(this);
+        actv_Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Name.showDropDown();
+            }
+        });
 
         ArrayAdapter<String> adapterCountry = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerCountries());
         actv_Country = (AutoCompleteTextView) findViewById(R.id.edit_pais);
@@ -64,17 +71,48 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         actv_Country.setAdapter(adapterCountry);
         actv_Country.addTextChangedListener(this);
 
+        actv_Country.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_Country.showDropDown();
+            }
+        });
+
         ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerCities());
         actv_city = (AutoCompleteTextView) findViewById(R.id.edit_ciudad);
         actv_city.setThreshold(0);
         actv_city.setAdapter(adapterCity);
         actv_city.addTextChangedListener(this);
+        actv_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_city.showDropDown();
+            }
+        });
 
         ArrayAdapter<String> adapterLastname = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, dao.getUniquePassengerLastNames());
         actv_lastName = (AutoCompleteTextView) findViewById(R.id.edit_apellido);
         actv_lastName.setThreshold(0);
         actv_lastName.setAdapter(adapterLastname);
         actv_lastName.addTextChangedListener(this);
+        actv_lastName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actv_lastName.showDropDown();
+            }
+        });
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            onResume();
+            passengers = dao.getAllPassengers();
+            passengerAdapter = new PassengerAdapter(this, passengers);
+            listView.setAdapter(passengerAdapter);
+        }
     }
 
     @Override
@@ -127,4 +165,16 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
     public void afterTextChanged(Editable s) {
 
     }
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
+    }
+
 }

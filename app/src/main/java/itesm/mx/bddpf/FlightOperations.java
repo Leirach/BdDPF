@@ -27,6 +27,7 @@ public class FlightOperations {
     public void open() throws SQLException {
         try {
             db = dbHelper.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = on");
         } catch (SQLException e) {
             Log.e("SQLOPEN", e.toString());
         }
@@ -229,6 +230,50 @@ public class FlightOperations {
         }
         return listFlights;
     }
+    public ArrayList<Ticket> getAllTickets() {
+        ArrayList<Ticket> listTickets = new ArrayList<Ticket>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Ticket.TABLE_NAME;
+        Ticket ticket;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    ticket = new Ticket(cursor.getString(1), cursor.getDouble(2),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8));
+                    listTickets.add(ticket);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listTickets;
+    }
+    public ArrayList<Ticket> getAllTicketsWith(String reservationSel, String classSel, String ticketSel) {
+        ArrayList<Ticket> listTickets = new ArrayList<Ticket>();
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Ticket.TABLE_NAME + " WHERE " +
+                DataBaseSchema.Ticket.COLUMN_NAME_RESERVATION + " LIKE '%" + reservationSel + "%' AND " +
+                DataBaseSchema.Ticket.COLUMN_NAME_CLASS + " LIKE '%" + classSel + "%'" +
+                " AND " + DataBaseSchema.Ticket.COLUMN_NAME_TICKET_NUMBER + " LIKE '%" + ticketSel + "%'";
+        Ticket ticket;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    ticket = new Ticket(cursor.getString(1), cursor.getDouble(2),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7), cursor.getString(8));
+                    listTickets.add(ticket);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listTickets;
+    }
+
 
     public ArrayList<Flight> getAllFlightsFromTo(String airportOrigin, String airportDestination) {
         ArrayList<Flight> listFlights = new ArrayList<Flight>();
@@ -317,6 +362,46 @@ public class FlightOperations {
         return null;
     }
 
+    //return specific airplane
+    public Airplane getAirplane(String id) {
+        Airplane airplane;
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.Airplane.TABLE_NAME +
+                " WHERE " + DataBaseSchema.Airplane.COLUMN_NAME_AIRPLANE_ID + "=\'" + id + "\'";
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airplane = new Airplane(cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                    return airplane;
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return null;
+    }
+
+    //return specific airport
+    public Airport getAirport(String code) {
+        Airport airport;
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.AirportTable.TABLE_NAME +
+                " WHERE " + DataBaseSchema.AirportTable.COLUMN_NAME_AIRPORT_CODE + "=\'" + code + "\'";
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airport = new Airport(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                    return airport;
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return null;
+    }
+
     //return specific reservation
     public Reservation getReservation(String reservationCode) {
         Reservation reservation;
@@ -391,6 +476,57 @@ public class FlightOperations {
             Log.e("SQLLIST", e.toString());
         }
         return listPassengers;
+    }
+
+    public ArrayList<String> getUniqueClasses() {
+        ArrayList<String> listClasses = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Ticket.COLUMN_NAME_CLASS + " FROM " + DataBaseSchema.Ticket.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listClasses.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listClasses;
+    }
+
+    public ArrayList<String> getUniqueTickets() {
+        ArrayList<String> listTickets = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Ticket.COLUMN_NAME_TICKET_NUMBER + " FROM " + DataBaseSchema.Ticket.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listTickets.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listTickets;
+    }
+
+    public ArrayList<String> getUniqueReservations() {
+        ArrayList<String> listReservations = new ArrayList<String>();
+        String selectQuery = "SELECT DISTINCT " + DataBaseSchema.Ticket.COLUMN_NAME_RESERVATION + " FROM " + DataBaseSchema.Ticket.TABLE_NAME;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    listReservations.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return listReservations;
     }
 
     public ArrayList<String> getUniquePassengers() {

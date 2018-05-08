@@ -4,8 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".TicketsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_first">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ticketnumber"/>
+            <AutoCompleteTextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_ticket"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/classflight"/>
+            <AutoCompleteTextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_class"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reservation"/>
+            <AutoCompleteTextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_reservation"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview"
+        android:layout_below="@id/ll_first">
+
+    </ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -15,6 +66,5 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="40dp"
         android:src="@mipmap/ic_add_black_24dp" />
-
 
 </RelativeLayout>
