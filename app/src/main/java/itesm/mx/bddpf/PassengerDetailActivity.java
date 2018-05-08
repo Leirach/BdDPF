@@ -1,5 +1,6 @@
 package itesm.mx.bddpf;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -73,7 +74,8 @@ public class PassengerDetailActivity extends AppCompatActivity implements ListVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        //reservation detail activity
+        Intent reservationDetail;
     }
 
     private void getReservations(){
