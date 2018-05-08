@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class TicketsActivity extends AppCompatActivity {
@@ -21,5 +22,7 @@ public class TicketsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT).show();
             }
         });
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 }
