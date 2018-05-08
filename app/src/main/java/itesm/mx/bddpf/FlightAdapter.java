@@ -22,16 +22,13 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Flight flight = getItem(position);
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_flight, parent, false);
-        TextView tvFlightID = (TextView) convertView.findViewById(R.id.text_flightID);
         TextView tvFlightOrigin = (TextView) convertView.findViewById(R.id.text_from);
         TextView tvFlightOriginTerminal = (TextView) convertView.findViewById(R.id.text_from_terminal);
         TextView tvFlightOriginGate = (TextView) convertView.findViewById(R.id.text_from_gate);
         TextView tvFlightDestination = (TextView) convertView.findViewById(R.id.text_to);
         TextView tvFlightDestinationTerminal = (TextView) convertView.findViewById(R.id.text_to_terminal);
         TextView tvFlightDestinationGate = (TextView) convertView.findViewById(R.id.text_to_gate);
-        TextView tvDate = (TextView) convertView.findViewById(R.id.text_to_terminal);
 
-        tvFlightID.setText(flight.getFlightID());
         tvFlightOrigin.setText(flight.getAirportOrigin());
         tvFlightOriginTerminal.setText(flight.getTerminalOrigin());
         tvFlightDestination.setText(flight.getAirportDestination());
@@ -39,8 +36,6 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         tvFlightDestinationTerminal.setText(flight.getTerminalDestination());
         tvFlightOriginGate.setText(flight.getGateOrigin());
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE dd/MM-yyyy HH:mm");
-        tvDate.setText(simpleDateFormat.format(flight.getFlightTime()));
         return convertView;
     }
 }

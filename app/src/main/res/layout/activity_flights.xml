@@ -1,49 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FlightsActivity">
+
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/ll_first">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Salida: "/>
-            <AutoCompleteTextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_from"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Destino: "/>
-            <AutoCompleteTextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_to"/>
-        </LinearLayout>
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/listview"
+        app:layout_constraintStart_toStartOf="@+id/listview"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/edit_from"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="From" />
+
+        <AutoCompleteTextView
+            android:id="@+id/edit_to"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="To" />
     </LinearLayout>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview"
-        android:layout_below="@id/ll_first">
-
-    </ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -52,6 +40,28 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="40dp"
-        android:src="@mipmap/ic_add_black_24dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@mipmap/ic_add_black_24dp"
+        android:tint="@color/DarkVivaGreen"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/listview"
+        app:layout_constraintEnd_toEndOf="@+id/listview" />
 
-</RelativeLayout>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/ll_first"
+        android:layout_marginTop="8dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+    </ListView>
+
+</android.support.constraint.ConstraintLayout>
