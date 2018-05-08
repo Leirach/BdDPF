@@ -1,6 +1,7 @@
 package itesm.mx.bddpf;
 
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,7 +62,10 @@ public class AirplanesActivity extends AppCompatActivity implements ListView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //
+        Airplane airplane = (Airplane) parent.getItemAtPosition(position);
+        Intent airplaneDetailIntent = new Intent(this, AirplaneDetailActivity.class);
+        airplaneDetailIntent.putExtra(AirplaneDetailActivity.ID_KEY, airplane.getID());
+        startActivity(airplaneDetailIntent);
     }
 
     public void searchAirplanes() {
