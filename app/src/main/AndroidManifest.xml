@@ -25,7 +25,8 @@
         <activity android:name=".AddNewReservationActivity" />
         <activity android:name=".ReservationDetailActivity" />
         <activity android:name=".AirportsActivity" />
-        <activity android:name=".AirplanesActivity"></activity>
+        <activity android:name=".AirplanesActivity"/>
+        <activity android:name=".PassengerAddActivity"></activity>
     </application>
 
 </manifest>

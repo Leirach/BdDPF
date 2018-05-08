@@ -363,15 +363,10 @@ public class FlightOperations {
         return listPassengers;
     }
 
-    //Filter passengers with name, country or city
+    //Filter passengers with first name, last name, country or city
     public ArrayList<Passenger> passengerQuery(String name, String lastname, String city, String country) {
         ArrayList<Passenger> listPassengers = new ArrayList<>();
         Passenger passenger;
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT * FROM " + DataBaseSchema.Passenger.TABLE_NAME + " ");
-        if (name.length() != 0){
-            queryBuilder.append("WHERE " + DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME + " LIKE \'" + name + "%\'");
-        }
 
         String selectQuery = "SELECT * FROM " + DataBaseSchema.Passenger.TABLE_NAME + " WHERE " +
                 DataBaseSchema.Passenger.COLUMN_NAME_FIRST_NAME + " LIKE '%" + name + "%' AND " +

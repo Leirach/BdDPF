@@ -39,8 +39,8 @@ public class PassengerActivity extends AppCompatActivity implements ListView.OnI
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start add activity
-                Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT).show();
+                Intent addPassenger = new Intent(getApplicationContext(), PassengerAddActivity.class);
+                startActivity(addPassenger);
             }
         });
 
