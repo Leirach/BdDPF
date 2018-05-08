@@ -82,6 +82,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void fillDatabase() {
+        //Add passengers
+        dao.addPassenger("MARC650607HNLRIR07", "Adult", "8112562389", "8113322523", "Carlos Ivan", "Martinez Ruiz", "carlos.martinez@gmail.com", "Hidalgo 2212", "64123", "Monterrey", "Nuevo Leon",  "Mexico");
+        dao.addPassenger("LOKD250607HNLKJR04", "Adult", "8112565219", "8114432521", "Juan Pablo", "Elizondo Benavides", "juan.elizzz@gmail.com", "Guadalajara 132", "64654", "Monterrey", "Nuevo Leon",  "Mexico");
+        dao.addPassenger("ASDJ638741HNLRIR12", "Adult", "812352134", "8143433333", "Carlos Pablo", "Castro Benavides", "carlos.castro@gmail.com", "Montevideo 1253", "64123", "Monterrey", "Nuevo Leon",  "Mexico");
+        dao.addPassenger("GUEL710105MNLILI04", "Child", null, null, "Luisa Regina", "Elizondo Castro", null, null, null, null, null, null);
+
+
+        //Add reservations
+        dao.addReservation("KPM123", "Cash", "MARC650607HNLRIR07");
+        dao.addReservation("AVD691", "CreditCard", "ASDJ638741HNLRIR12");
+        dao.addReservation("LKD231", "DebitCard", "LOKD250607HNLKJR04");
+        dao.addReservation("GJK986", "Invoice", "MARC650607HNLRIR07");
+        dao.addReservation("KJD763", "CreditCard", "ASDJ638741HNLRIR12");
+        dao.addReservation("SJF235", "DebitCard", "LOKD250607HNLKJR04");
+        dao.addReservation("OIF236", "Cash", "MARC650607HNLRIR07");
+        dao.addReservation("SKJ234", "CreditCard", "LOKD250607HNLKJR04");
+        dao.addReservation("AQW862", "Invoice", "LOKD250607HNLKJR04");
+        dao.addReservation("KFJ823", "CreditCard", "ASDJ638741HNLRIR12");
+        dao.addReservation("NMS234", "CreditCard", "MARC650607HNLRIR07");
+
+        //Insert airports
+        dao.addAirport("MEX", "Mexico City", "Mexico", "Benito Juarez International Airport");
+        dao.addAirport("MTY", "Monterrey", "Mexico", "Mariano Escobedo International Airport");
+        dao.addAirport("LAX", "Los Angeles", "USA", "Los Angeles International Airport");
+
+        //add airplanes
+        dao.addAirplane("A127", "BOEING737", 140, 20, 0);
+        dao.addAirplane("A132", "BOEING737", 140, 20, 0);
+        dao.addAirplane("D142", "ABUSA330", 180, 40, 15);
+        dao.addAirplane("D238", "ABUSA330", 180, 30, 25);
+        dao.addAirplane("D322", "ABUSA330", 165, 50, 20);
 
         //Add flights
         dao.addFlight("AA1021", toDate(2018,4,12,17,50), 70, "MTY", "A", "12A", "MEX", "B", "17", "A127");
@@ -97,31 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dao.addFlight("IJ1642", toDate(2018,4,15,12,30), 65, "MEX", "B", "12", "MTY", "B", "9", "A132");
         dao.addFlight("IJ6423", toDate(2018,4,16,22,10), 260, "LAX", "A", "16", "MEX", "B", "17", "D238");
 
-        //Add passengers
-        dao.addPassenger("MARC650607HNLRIR07", "Adult", "8112562389", "8113322523", "Carlos Ivan", "Martinez Ruiz", "carlos.martinez@gmail.com", "Hidalgo 2212", "64123", "Monterrey", "Nuevo Leon",  "Mexico");
-        dao.addPassenger("LOKD250607HNLKJR04", "Adult", "8112565219", "8114432521", "Juan Pablo", "Elizondo Benavides", "juan.elizzz@gmail.com", "Guadalajara 132", "64654", "Monterrey", "Nuevo Leon",  "Mexico");
-        dao.addPassenger("ASDJ638741HNLRIR12", "Adult", "812352134", "8143433333", "Carlos Pablo", "Castro Benavides", "carlos.castro@gmail.com", "Montevideo 1253", "64123", "Monterrey", "Nuevo Leon",  "Mexico");
-        dao.addPassenger("GUEL710105MNLILI04", "Child", null, null, "Luisa Regina", "Elizondo Castro", null, null, null, null, null, null);
-
-
-        //Add reservations
-        dao.addReservation("KPM123", "Cash".toUpperCase(), "MARC650607HNLRIR07");
-        dao.addReservation("AVD691", "CreditCard".toUpperCase(), "ASDJ638741HNLRIR12");
-        dao.addReservation("LKD231", "DebitCard".toUpperCase(), "LOKD250607HNLKJR04");
-        dao.addReservation("GJK986", "Invoice".toUpperCase(), "MARC650607HNLRIR07");
-        dao.addReservation("KJD763", "CreditCard".toUpperCase(), "ASDJ638741HNLRIR12");
-        dao.addReservation("SJF235", "DebitCard".toUpperCase(), "LOKD250607HNLKJR04");
-        dao.addReservation("OIF236", "Cash".toUpperCase(), "MARC650607HNLRIR07");
-        dao.addReservation("SKJ234", "CreditCard".toUpperCase(), "LOKD250607HNLKJR04");
-        dao.addReservation("AQW862", "Invoice".toUpperCase(), "LOKD250607HNLKJR04");
-        dao.addReservation("KFJ823", "CreditCard".toUpperCase(), "ASDJ638741HNLRIR12");
-        dao.addReservation("NMS234", "CreditCard".toUpperCase(), "MARC650607HNLRIR07");
-
-        //Insert airports
-        dao.addAirport("MEX", "Mexico City", "Mexico", "Benito Juarez International Airport");
-        dao.addAirport("MTY", "Monterrey", "Mexico", "Mariano Escobedo International Airport");
-        dao.addAirport("LAX", "Los Angeles", "USA", "Los Angeles International Airport");
-
         //Insert tickets
         dao.addTicket("LKJ125432A", 40.12, "14C", "Economy", "AA1021", "KPM123", "Food", "MARC650607HNLRIR07");
         dao.addTicket("8T4EBYIAGO", 240.53, "28D", "First", "AA4081", "AVD691", "", "ASDJ638741HNLRIR12");
@@ -136,14 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dao.addTicket("RGSUPK6KF2", 55.59, "2C", "Economy", "IJ1255", "NMS234", "", "MARC650607HNLRIR07");
         dao.addTicket("2IO05EVREX", 23.44, "6A", "Economy", "AA1662", "AQW862", "Food", "LOKD250607HNLKJR04");
         dao.addTicket("Q6DWJT2148", 23.44, "6B", "Economy", "IJ6423", "AQW862", "Food", "GUEL710105MNLILI04");
-
-
-        //add airplanes
-        dao.addAirplane("A127", "BOEING737", 140, 20, 0);
-        dao.addAirplane("A132", "BOEING737", 140, 20, 0);
-        dao.addAirplane("D142", "ABUSA330", 180, 40, 15);
-        dao.addAirplane("D238", "ABUSA330", 180, 30, 25);
-        dao.addAirplane("D322", "ABUSA330", 165, 50, 20);
 
     }
 

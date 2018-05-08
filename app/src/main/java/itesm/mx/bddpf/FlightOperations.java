@@ -27,6 +27,7 @@ public class FlightOperations {
     public void open() throws SQLException {
         try {
             db = dbHelper.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = on");
         } catch (SQLException e) {
             Log.e("SQLOPEN", e.toString());
         }
@@ -112,7 +113,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION, paymentInfo);
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER, passengerID);
 
-            db.insert(DataBaseSchema.Reservation.TABLE_NAME, null, values);
+            db.insertOrThrow(DataBaseSchema.Reservation.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
             return false;
