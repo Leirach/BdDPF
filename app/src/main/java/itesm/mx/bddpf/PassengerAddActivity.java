@@ -58,4 +58,16 @@ public class PassengerAddActivity extends AppCompatActivity implements View.OnCl
             }
         }
     }
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
+    }
+
 }

@@ -33,4 +33,16 @@ public class AirplaneDetailActivity extends AppCompatActivity {
         tvFirstSeats.setText(Integer.toString(airplane.getFirstSeats()));
 
     }
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
+    }
+
 }

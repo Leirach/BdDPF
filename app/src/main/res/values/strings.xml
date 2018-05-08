@@ -33,4 +33,7 @@
     <string name="Code">Codigo:</string>
     <string name="model">Model:</string>
     <string name="ID">ID:</string>
+    <string name="ticketnumber">Ticket number:</string>
+    <string name="classflight">Class:</string>
+    <string name="reservation">Reservation:</string>
 </resources>

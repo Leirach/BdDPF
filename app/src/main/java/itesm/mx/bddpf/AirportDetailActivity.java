@@ -29,4 +29,16 @@ public class AirportDetailActivity extends AppCompatActivity {
         tvCity.setText(airport.getCity());
         tvCountry.setText(airport.getCountry());
     }
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
+    }
+
 }
