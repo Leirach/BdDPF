@@ -50,7 +50,7 @@ public class PassengerAddActivity extends AppCompatActivity implements View.OnCl
 
             boolean result = dao.addPassenger(formText[0], formText[1], formText[2], formText[3], formText[4], formText[5],
                     formText[6], formText[7], formText[8], formText[9], formText[10], formText[11]);
-            if (result){
+            if (result) {
                 Toast.makeText(getApplicationContext(), "Added passenger!", Toast.LENGTH_SHORT).show();
                 Intent returnIntent = new Intent();
                 setResult(Activity.RESULT_OK, returnIntent);

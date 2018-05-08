@@ -67,7 +67,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.FlightTable.COLUMN_NAME_GATE_DESTINATION, gateDestination);
             values.put(DataBaseSchema.FlightTable.COLUMN_NAME_AIRPLANE, airplane);
 
-            newRowId = db.insert(DataBaseSchema.FlightTable.TABLE_NAME, null, values);
+            newRowId = db.insertOrThrow(DataBaseSchema.FlightTable.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
         }
@@ -82,7 +82,6 @@ public class FlightOperations {
     public boolean addPassenger(String passengerID, String type, String cellNumber, String fixedNumber,
                              String firstName, String lastName, String email, String streetAddress,
                              String postalCode, String city, String state, String country) {
-        long newRowId = 0;
         try {
             ContentValues values = new ContentValues();
             values.put(DataBaseSchema.Passenger.COLUMN_NAME_PASSENGER_ID, passengerID);
@@ -98,7 +97,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.Passenger.COLUMN_NAME_STATE, state);
             values.put(DataBaseSchema.Passenger.COLUMN_NAME_COUNTRY, country);
 
-            newRowId = db.insert(DataBaseSchema.Passenger.TABLE_NAME, null, values);
+            db.insertOrThrow(DataBaseSchema.Passenger.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
             return false;
@@ -113,7 +112,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PAYMENT_INFORMATION, paymentInfo);
             values.put(DataBaseSchema.Reservation.COLUMN_NAME_PASSENGER, passengerID);
 
-            db.insert(DataBaseSchema.Reservation.TABLE_NAME, null, values);
+            db.insertOrThrow(DataBaseSchema.Reservation.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
             return false;
@@ -130,7 +129,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.AirportTable.COLUMN_NAME_COUNTRY, country);
             values.put(DataBaseSchema.AirportTable.COLUMN_NAME_NAME, name);
 
-            newRowId = db.insert(DataBaseSchema.AirportTable.TABLE_NAME, null, values);
+            newRowId = db.insertOrThrow(DataBaseSchema.AirportTable.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
         }
@@ -151,7 +150,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.Ticket.COLUMN_NAME_EXTRA_SERVICES, extraServices);
             values.put(DataBaseSchema.Ticket.COLUMN_NAME_PASSENGER, passenger);
 
-            newRowId = db.insert(DataBaseSchema.Ticket.TABLE_NAME, null, values);
+            newRowId = db.insertOrThrow(DataBaseSchema.Ticket.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
         }
@@ -168,7 +167,7 @@ public class FlightOperations {
             values.put(DataBaseSchema.Airplane.COLUMN_NAME_SEATS_BUSINESS, seatsBusiness);
             values.put(DataBaseSchema.Airplane.COLUMN_NAME_SEATS_FIRST_CLASS, seatsFirstClass);
 
-            newRowId = db.insert(DataBaseSchema.Airplane.TABLE_NAME, null, values);
+            newRowId = db.insertOrThrow(DataBaseSchema.Airplane.TABLE_NAME, null, values);
         } catch (SQLException e) {
             Log.e("SQLADD", e.toString());
         }
