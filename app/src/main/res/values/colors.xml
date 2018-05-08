@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="VivaGreen">#42a841</color>
+    <color name="FadedWhite">#33ffffff</color>
+    <color name="DarckVivaGreen">#154e15</color>
+    <color name="VivaRed">#d0021b</color>
+    <color name="DarkVivaGreen">#154e15</color>
 </resources>
