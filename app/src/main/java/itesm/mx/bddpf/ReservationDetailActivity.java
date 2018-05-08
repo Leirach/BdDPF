@@ -29,4 +29,16 @@ public class ReservationDetailActivity extends AppCompatActivity {
         tvPassenger.setText(reservation.getPassenger());
         tvPayment.setText(reservation.getPayment());
     }
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
+    }
+
 }

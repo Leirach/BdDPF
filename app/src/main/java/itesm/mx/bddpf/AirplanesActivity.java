@@ -113,4 +113,16 @@ public class AirplanesActivity extends AppCompatActivity implements ListView.OnI
     public void afterTextChanged(Editable s) {
 
     }
+    @Override
+    protected void onPause() {
+        dao.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dao.open();
+        super.onResume();
+    }
+
 }
