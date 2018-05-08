@@ -224,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:id="@+id/city_edit"
-                android:hint="dirección"
+                android:hint="ciudad"
                 android:layout_toEndOf="@id/field8"
                 android:layout_alignBaseline="@id/field8"/>
 
