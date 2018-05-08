@@ -76,10 +76,10 @@ public class AirportsActivity extends AppCompatActivity implements ListView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        /*Intent airportDetail = new Intent(this, AirportDetailActivity.class);
+        Intent airportDetail = new Intent(this, AirportDetailActivity.class);
         Airport airport = (Airport) parent.getItemAtPosition(position);
-        airportDetail.putExtra(AirportDetailActivity.AIRPORT_KEY, airport.getCode());
-        startActivity(airportDetail);*/
+        airportDetail.putExtra(AirportDetailActivity.CODE_KEY, airport.getCode());
+        startActivity(airportDetail);
     }
 
     public void searchAirports() {

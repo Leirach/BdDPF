@@ -336,6 +336,26 @@ public class FlightOperations {
         return null;
     }
 
+    //return specific airport
+    public Airport getAirport(String code) {
+        Airport airport;
+        String selectQuery = "SELECT * FROM " + DataBaseSchema.AirportTable.TABLE_NAME +
+                " WHERE " + DataBaseSchema.AirportTable.COLUMN_NAME_AIRPORT_CODE + "=\'" + code + "\'";
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    airport = new Airport(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                    return airport;
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("SQLLIST", e.toString());
+        }
+        return null;
+    }
+
     //return specific reservation
     public Reservation getReservation(String reservationCode) {
         Reservation reservation;
