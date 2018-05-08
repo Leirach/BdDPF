@@ -1,126 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/background_view2"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/rounded_green_background"
+        android:radius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="-25dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/background_view2"
+        app:layout_constraintTop_toTopOf="@+id/background_view2" />
+
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_to_terminal"
-        android:text="Mon 23/02-2018 22:00"/>
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:alpha="0.5"
+        android:text="FROM"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/text_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="FROM"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_to_terminal"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical"
-        android:id="@+id/ll_first">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/text_from">
+
         <TextView
+            android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:text="GATE "
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:text="@string/flightID"/>
+            tools:layout_editor_absoluteX="68dp"
+            tools:layout_editor_absoluteY="220dp" />
+
         <TextView
+            android:id="@+id/text_from_gate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="156dp"
+            tools:layout_editor_absoluteY="220dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:text="TERMINAL "
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="68dp" />
+
+        <TextView
+            android:id="@+id/text_from_terminal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="A"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="122dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="163dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="-25dp"
+        app:layout_constraintEnd_toEndOf="@+id/background_view2"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/background_view2" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:alpha="0.5"
+        android:text="TO"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+    <TextView
+        android:id="@+id/text_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TO"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/text_to">
+
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AA1202"
-            android:id="@+id/text_flightID"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ll_first"
-        android:layout_below="@id/text_to_terminal"
-        android:id="@+id/ll_second"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:text="GATE "
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:text="@string/origin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/terminal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gate"/>
+            tools:layout_editor_absoluteX="68dp"
+            tools:layout_editor_absoluteY="220dp" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ll_second"
-        android:id="@+id/ll_third"
-        android:layout_marginStart="10dp"
-        android:layout_below="@id/text_to_terminal"
-        android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/text_to_gate"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:id="@+id/text_from"
-            android:text="MTY"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="2"
-            android:id="@+id/text_from_terminal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12"
-            android:id="@+id/text_from_gate"/>
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="367dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_to_terminal"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/ll_third"
-        android:id="@+id/ll_fourth"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/destination"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/terminal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gate"/>
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ll_fourth"
-        android:layout_marginStart="10dp"
-        android:layout_below="@id/text_to_terminal"
-        android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_to"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:text="TERMINAL"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:text="MTY"/>
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="339dp" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/text_to_terminal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2"
-            android:id="@+id/text_to_terminal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12"
-            android:id="@+id/text_to_gate"/>
+            android:layout_weight="1"
+            android:text="B"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="360dp" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/background_view2"
+        app:layout_constraintEnd_toEndOf="@+id/background_view2"
+        app:layout_constraintStart_toStartOf="@+id/background_view2"
+        app:layout_constraintTop_toTopOf="@+id/background_view2"
+        app:srcCompat="@drawable/airplane" />
 
-</RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

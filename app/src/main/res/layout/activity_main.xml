@@ -5,79 +5,171 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/row1">
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/flights"
-                android:id="@+id/btn_seeFlights"/>
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/passengers"
-                android:id="@+id/btn_seePassengers"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/row2"
-            android:gravity="center"
-            android:layout_below="@id/row1">
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/reservations"
-                android:id="@+id/btn_seeReservations"/>
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/tickets"
-                android:id="@+id/btn_seeTickets"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:id="@+id/row3"
-            android:layout_below="@id/row2">
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/airplane"
-                android:id="@+id/btn_airplanes"/>
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/airports"
-                android:id="@+id/btn_airport"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:layout_below="@id/row3">
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/filldatabase"
-                android:id="@+id/btn_fillDB"/>
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:text="@string/emptydatabase"
-                android:id="@+id/btn_empty"/>
-        </LinearLayout>
-    </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_airplanes"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_airplanes"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/airplanes" />
+
+        <Button
+            android:id="@+id/btn_airplanes"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/rounded_green_background"
+            android:text="AIRPLANES"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_airport"
+            app:layout_constraintStart_toStartOf="@+id/btn_airport"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/airports" />
+
+        <Button
+            android:id="@+id/btn_airport"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="36dp"
+            android:background="@drawable/rounded_green_background"
+            android:text="AIRPORTS"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_seeFlights"
+            app:layout_constraintStart_toStartOf="@+id/btn_seeFlights"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:srcCompat="@drawable/flights" />
+
+        <Button
+            android:id="@+id/btn_seeFlights"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/rounded_green_background"
+            android:text="FLIGHTS"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_seePassengers"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_seePassengers"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:srcCompat="@drawable/passengers" />
+
+        <Button
+            android:id="@+id/btn_seePassengers"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="36dp"
+            android:background="@drawable/rounded_green_background"
+            android:text="PASSENGERS"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_seeReservations"
+            app:layout_constraintStart_toStartOf="@+id/btn_seeReservations"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:srcCompat="@drawable/bookings" />
+
+        <Button
+            android:id="@+id/btn_seeReservations"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/rounded_green_background"
+            android:text="BOOKINGS"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_seeTickets"
+            app:layout_constraintStart_toStartOf="@+id/btn_seeTickets"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:srcCompat="@drawable/tickets" />
+
+        <Button
+            android:id="@+id/btn_seeTickets"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="36dp"
+            android:background="@drawable/rounded_green_background"
+            android:text="TICKETS"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn_empty"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/rounded_red_background"
+            android:text="ERASE DB"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+        <Button
+            android:id="@+id/btn_fillDB"
+            android:layout_width="136dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/rounded_grey_background"
+            android:text="CREATE DB"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
