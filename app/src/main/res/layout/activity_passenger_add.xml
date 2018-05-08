@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="itesm.mx.bddpf.PassengerAddActivity">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Nuevo Pasajero"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="horizontal">
+
+            <!--curp-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/curp_add"
+                android:text="@string/curp"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/curp_edit"
+                android:hint="curp"
+                android:layout_toEndOf="@id/curp_add"
+                android:layout_alignBaseline="@id/curp_add"/>
+
+            <!--nombre-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/curp_add"
+                android:id="@+id/fname"
+                android:text="@string/nombre"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/name_edit"
+                android:hint="nombre(s)"
+                android:layout_toEndOf="@id/fname"
+                android:layout_alignBaseline="@id/fname"/>
+
+            <!--apellido-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/fname"
+                android:id="@+id/lname"
+                android:text="@string/apellido"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/lastname_edit"
+                android:hint="apellido(s)"
+                android:layout_toEndOf="@id/lname"
+                android:layout_alignBaseline="@id/lname"/>
+
+            <!--tipo-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/lname"
+                android:id="@+id/type_add"
+                android:text="@string/tipo"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/type_edit"
+                android:hint="tipo de pasajero"
+                android:layout_toEndOf="@id/type_add"
+                android:layout_alignBaseline="@id/type_add"/>
+
+            <!--numero de celular-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/type_add"
+                android:id="@+id/field3"
+                android:text="@string/numero_cel"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/cel_edit"
+                android:hint="numero celular"
+                android:layout_toEndOf="@id/field3"
+                android:layout_alignBaseline="@id/field3"/>
+
+            <!--numero fijo-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field3"
+                android:id="@+id/field4"
+                android:text="@string/numero_fijo"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/fixed_edit"
+                android:hint="numero fijo"
+                android:layout_toEndOf="@id/field4"
+                android:layout_alignBaseline="@id/field4"/>
+
+            <!--Email-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field4"
+                android:id="@+id/field5"
+                android:text="@string/email"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/email_edit"
+                android:hint="email"
+                android:layout_toEndOf="@id/field5"
+                android:layout_alignBaseline="@id/field5"/>
+
+            <!--Pais-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field5"
+                android:id="@+id/field6"
+                android:text="@string/pais"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/country_edit"
+                android:hint="país"
+                android:layout_toEndOf="@id/field6"
+                android:layout_alignBaseline="@id/field6"/>
+
+            <!--estado-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field6"
+                android:id="@+id/field7"
+                android:text="@string/estado"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/state_edit"
+                android:hint="@string/estado"
+                android:layout_toEndOf="@id/field7"
+                android:layout_alignBaseline="@id/field7"/>
+
+            <!--ciudad-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field7"
+                android:id="@+id/field8"
+                android:text="@string/ciudad"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/city_edit"
+                android:hint="dirección"
+                android:layout_toEndOf="@id/field8"
+                android:layout_alignBaseline="@id/field8"/>
+
+            <!--codigo postal-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field8"
+                android:id="@+id/field9"
+                android:text="@string/zip"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/zip_edit"
+                android:hint="código postal"
+                android:layout_toEndOf="@id/field9"
+                android:layout_alignBaseline="@id/field9"/>
+
+            <!--direccion-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/field9"
+                android:id="@+id/field10"
+                android:text="@string/dir"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:id="@+id/address_edit"
+                android:hint="dirección"
+                android:layout_toEndOf="@id/field10"
+                android:layout_alignBaseline="@id/field10"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_button"
+                android:text="Agregar pasajero"
+                android:layout_below="@id/field10"/>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+    </ScrollView>
